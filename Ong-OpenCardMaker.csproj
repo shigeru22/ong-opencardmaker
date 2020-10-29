@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Ong_OpenCardMaker</RootNamespace>
+    <RootNamespace>OpenCardMaker</RootNamespace>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 

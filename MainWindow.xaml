@@ -1,12 +1,51 @@
-﻿<Window x:Class="Ong_OpenCardMaker.MainWindow"
+﻿<Window x:Name="OpenCardMaker" x:Class="OpenCardMaker.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ong_OpenCardMaker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+        Title="OpenCardMaker" Width="371" Height="270" ResizeMode="CanMinimize">
+    <Grid x:Name="MainWindowGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="MainText" HorizontalAlignment="Left" Margin="20,0,0,0" Text="Specify Ongeki folder and its configuration." TextWrapping="Wrap" VerticalAlignment="Center"/>
+        <Grid x:Name="ProgramLocationGrid" Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="112"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="OngekiLocation" Grid.Column="0" Text="Ongeki Location" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,5,0" Foreground="Red" ToolTip="Ongeki folder location" />
+            <TextBox x:Name="OngekiLocationText" Grid.Column="1" HorizontalAlignment="Center" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="150" Margin="5,0,5,0" Height="20" IsEnabled="False" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Button x:Name="OngekiLocationBrowse" Content="Browse..." Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="63" Height="20" RenderTransformOrigin="0.362,0.46" Margin="0,0,20,0"/>
+        </Grid>
+        <Grid x:Name="ConfigurationLocationGrid" Grid.Row="2" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="112"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="ConfigLocation" Grid.Column="0" Text="Config Location" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,5,0" Foreground="Red" ToolTip="Configuration folder location" />
+            <TextBox x:Name="ConfigLocationText" Grid.Column="1" HorizontalAlignment="Center" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="150" Margin="5,0,5,0" Height="20" IsEnabled="False" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Button x:Name="ConfigLocationBrowse" Content="Browse..." Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="63" Height="20" RenderTransformOrigin="0.362,0.46" Margin="0,0,20,0"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="112"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="GameType" Grid.Column="0" Text="Type" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,5,0" Foreground="Black" ToolTip="Configuration folder location" />
+            <ComboBox Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="218" Height="22" Margin="5,0,20,0" VerticalContentAlignment="Center">
+                <ComboBoxItem IsSelected="True">O.N.G.E.K.I. PLUS</ComboBoxItem>
+                <ComboBoxItem>O.N.G.E.K.I. SUMMER</ComboBoxItem>
+            </ComboBox>
+        </Grid>
+        <Button Content="OK" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Height="20" Width="60"/>
     </Grid>
 </Window>
