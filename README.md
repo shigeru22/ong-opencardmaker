@@ -1,7 +1,7 @@
 # Ong-OpenCardMaker
 Open Card Maker Windows application.
 
-Meant to be used with the save files created with UnityParrot (Although no Ongeki SUMMER version available).
+Meant to be used with the save files created with [UnityParrot](https://github.com/teknogods/UnityParrot). (Although no Ongeki SUMMER version available).
 You'll need to add your own Ongeki dump and UnityParrot saved configurations folder location.
 
 Disclaimer:
