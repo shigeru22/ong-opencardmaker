@@ -23,7 +23,7 @@
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="OngekiLocation" Grid.Column="0" Text="Ongeki Location" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,5,0" Foreground="Red" ToolTip="Ongeki folder location" />
             <TextBox x:Name="OngekiLocationText" Grid.Column="1" HorizontalAlignment="Center" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="150" Margin="5,0,5,0" Height="20" IsEnabled="False" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-            <Button x:Name="OngekiLocationBrowse" Content="Browse..." Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="63" Height="20" RenderTransformOrigin="0.362,0.46" Margin="0,0,20,0"/>
+            <Button x:Name="OngekiLocationBrowse" Click="btnOngekiLocationClick" Content="Browse..." Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="63" Height="20" RenderTransformOrigin="0.362,0.46" Margin="0,0,20,0"/>
         </Grid>
         <Grid x:Name="ConfigurationLocationGrid" Grid.Row="2" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -33,7 +33,7 @@
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="ConfigLocation" Grid.Column="0" Text="Config Location" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,5,0" Foreground="Red" ToolTip="Configuration folder location" />
             <TextBox x:Name="ConfigLocationText" Grid.Column="1" HorizontalAlignment="Center" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="150" Margin="5,0,5,0" Height="20" IsEnabled="False" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-            <Button x:Name="ConfigLocationBrowse" Content="Browse..." Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="63" Height="20" RenderTransformOrigin="0.362,0.46" Margin="0,0,20,0"/>
+            <Button x:Name="ConfigLocationBrowse" Click="btnConfigLocationClick" Content="Browse..." Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="63" Height="20" RenderTransformOrigin="0.362,0.46" Margin="0,0,20,0"/>
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>

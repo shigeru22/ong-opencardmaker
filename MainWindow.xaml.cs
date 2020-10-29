@@ -24,5 +24,15 @@ namespace OpenCardMaker
         {
             InitializeComponent();
         }
+
+        public void btnOngekiLocationClick(object sender, RoutedEventArgs e)
+        {
+            OngekiLocationText.Text = Operations.Browse();
+        }
+
+        public void btnConfigLocationClick(object sender, RoutedEventArgs e)
+        {
+            ConfigLocationText.Text = Operations.Browse();
+        }
     }
 }
