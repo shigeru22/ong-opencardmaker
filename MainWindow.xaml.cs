@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenCardMaker.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,19 +21,54 @@ namespace OpenCardMaker
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool godMode; // will be put in config file later
+
         public MainWindow()
         {
             InitializeComponent();
+            godMode = false;
         }
 
-        public void btnOngekiLocationClick(object sender, RoutedEventArgs e)
+        void btnOngekiLocationClick(object sender, RoutedEventArgs e)
         {
             OngekiLocationText.Text = Operations.Browse();
         }
 
-        public void btnConfigLocationClick(object sender, RoutedEventArgs e)
+        void btnConfigLocationClick(object sender, RoutedEventArgs e)
         {
             ConfigLocationText.Text = Operations.Browse();
+        }
+
+        void btnGodModeClick(object sender, RoutedEventArgs e)
+        {
+            if (godMode)
+            {
+                GodModeToggle();
+                return;
+            }
+
+            var target = new GodModeConfirmation();
+            
+            bool? status = target.ShowDialog();
+            switch(status)
+            {
+                case true: GodModeToggle(); break;
+                default: break;
+            }
+        }
+
+        public void GodModeToggle()
+        {
+            if (godMode)
+            {
+                godMode = false;
+                GodModeBtn.Content = "Enable God Mode";
+            }
+            else
+            {
+                godMode = true;
+                GodModeBtn.Content = "Disable God Mode";
+            }
         }
     }
 }
