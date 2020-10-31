@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace OpenCardMaker.Windows
+namespace OpenCardMaker.Dialogs
 {
     /// <summary>
     /// Interaction logic for GodModeConfirmation.xaml
