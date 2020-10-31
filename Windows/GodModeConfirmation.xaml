@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenCardMaker.Windows"
         mc:Ignorable="d"
-        Title="God Mode Confirmation" Height="170" Width="250" ResizeMode="NoResize" Loaded="onLoad">
+        Title="God Mode Confirmation" Height="170" Width="250" ResizeMode="NoResize" Loaded="onLoad" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
