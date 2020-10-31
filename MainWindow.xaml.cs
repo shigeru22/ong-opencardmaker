@@ -21,7 +21,7 @@ namespace OpenCardMaker
     /// </summary>
     public partial class MainWindow : Window
     {
-        bool godMode; // will be put in config file later
+        bool godMode = true; // will be put in config file later
 
         public MainWindow()
         {

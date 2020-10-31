@@ -5,16 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ong_OpenCardMaker"
         mc:Ignorable="d"
-        Title="OpenCardMaker" Width="371" Height="270" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        Title="OpenCardMaker" Width="371" Height="240" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid x:Name="MainWindowGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="45"></RowDefinition>
-            <RowDefinition Height="45"></RowDefinition>
-            <RowDefinition Height="45"></RowDefinition>
-            <RowDefinition Height="45"></RowDefinition>
+            <!-- <RowDefinition Height="45"></RowDefinition> -->
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="45"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="MainText" HorizontalAlignment="Left" Margin="20,0,0,0" Text="Specify Ongeki folder and its configuration." TextWrapping="Wrap" VerticalAlignment="Center"/>
+        <TextBlock x:Name="MainText" HorizontalAlignment="Left" Margin="20,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+            Specify Ongeki folder and its configuration.
+            <LineBreak/>
+            Normal mode is still in progress.
+        </TextBlock>
         <Grid x:Name="ProgramLocationGrid" Grid.Row="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="112"/>
@@ -46,7 +51,7 @@
                 <ComboBoxItem>O.N.G.E.K.I. SUMMER</ComboBoxItem>
             </ComboBox>
         </Grid>
-        <Button Content="OK" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Center" Height="20" Width="60" Margin="90,0,0,0"/>
-        <Button Name="GodModeBtn" Content="Enable God Mode" Click="btnGodModeClick" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Center" Height="20" Width="120" Margin="160,0,0,0"/>
+        <Button Content="OK" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Center" Height="20" Width="60" Margin="85,0,0,0"/>
+        <Button Name="GodModeBtn" Content="Disable God Mode" Click="btnGodModeClick" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Center" Height="20" Width="120" Margin="155,0,0,0" IsEnabled="False" ToolTip="Normal mode is still in progress."/>
     </Grid>
 </Window>
