@@ -2,7 +2,7 @@
 
 namespace OpenCardMaker
 {
-    class Operations
+    class FrontEndOperations
     {
         public static string Browse()
         {
@@ -10,6 +10,7 @@ namespace OpenCardMaker
 
             using (FolderBrowserDialog dialog = new FolderBrowserDialog())
             {
+                dialog.ShowNewFolderButton = false;
                 if(dialog.ShowDialog() == DialogResult.OK)
                 {
                     location = dialog.SelectedPath;

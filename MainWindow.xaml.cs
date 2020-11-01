@@ -23,20 +23,20 @@ namespace OpenCardMaker
     public partial class MainWindow : Window
     {
         bool godMode; // will be put in config file later
+        string ongekiPath;
+        string configPath;
 
         public MainWindow()
         {
             InitializeComponent();
             godMode = true;
-
-            Closing += OpenWindow;
         }
 
         void OpenWindow(object sender, EventArgs e)
         {
             if (godMode == true)
             {
-                var window = new GodMain();
+                var window = new GodMain(ongekiPath, configPath);
                 window.Show();
             }
             else
@@ -48,17 +48,20 @@ namespace OpenCardMaker
 
         void btnOKClick(object sender, RoutedEventArgs e)
         {
+            Closing += OpenWindow;
             Close();
         }
 
         void btnOngekiLocationClick(object sender, RoutedEventArgs e)
         {
-            OngekiLocationText.Text = Operations.Browse();
+            OngekiLocationText.Text = FrontEndOperations.Browse();
+            ongekiPath = OngekiLocationText.Text;
         }
 
         void btnConfigLocationClick(object sender, RoutedEventArgs e)
         {
-            ConfigLocationText.Text = Operations.Browse();
+            ConfigLocationText.Text = FrontEndOperations.Browse();
+            configPath = ConfigLocationText.Text;
         }
 
         void btnGodModeClick(object sender, RoutedEventArgs e)
