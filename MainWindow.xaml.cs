@@ -18,26 +18,40 @@ using System.Windows.Shapes;
 
 namespace OpenCardMaker
 {
+    public enum OngekiType
+    {
+        Plus = 2,
+        Summer = 3
+    }
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         bool godMode; // will be put in config file later
-        string ongekiPath;
-        string configPath;
+        OngekiType type;
+        PathSettings settings;
 
         public MainWindow()
         {
+            settings = Preferences.LoadPreferences();
+            type = settings.type;
+
             InitializeComponent();
             godMode = true;
+            OngekiLocationText.Text = settings.ongeki;
+            ConfigLocationText.Text = settings.config;
+            // type?
         }
 
         void OpenWindow(object sender, EventArgs e)
         {
+            Preferences.SavePreferences(settings);
+
             if (godMode == true)
             {
-                var window = new GodMain(ongekiPath, configPath);
+                var window = new GodMain(settings.ongeki, settings.config);
                 window.Show();
             }
             else
@@ -60,7 +74,7 @@ namespace OpenCardMaker
 
             if (FileChecker.OngekiFolderCheck(temp))
             {
-                ongekiPath = temp;
+                settings.ongeki = temp;
                 OngekiLocation.Foreground = Brushes.Green;
             }
             else
@@ -79,7 +93,7 @@ namespace OpenCardMaker
 
             if (FileChecker.ConfigFolderCheck(temp))
             {
-                configPath = temp;
+                settings.config = temp;
                 ConfigLocation.Foreground = Brushes.Green;
             }
             else
