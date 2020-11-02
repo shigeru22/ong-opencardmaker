@@ -56,12 +56,18 @@ namespace OpenCardMaker
         {
             OngekiLocationText.Text = FrontEndOperations.Browse();
             ongekiPath = OngekiLocationText.Text;
+
+            if (ongekiPath != "") OngekiLocation.Foreground = Brushes.Green;
+            else OngekiLocation.Foreground = Brushes.Red;
         }
 
         void btnConfigLocationClick(object sender, RoutedEventArgs e)
         {
             ConfigLocationText.Text = FrontEndOperations.Browse();
             configPath = ConfigLocationText.Text;
+
+            if (configPath != "") ConfigLocation.Foreground = Brushes.Green;
+            else ConfigLocation.Foreground = Brushes.Red;
         }
 
         void btnGodModeClick(object sender, RoutedEventArgs e)
