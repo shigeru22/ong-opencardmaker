@@ -31,7 +31,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <TextBlock HorizontalAlignment="Right" Grid.Row="1" Text="UserId: UserName" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,7,75,0"/>
+        <TextBlock Name="UserName" HorizontalAlignment="Right" Grid.Row="1" Text="UserId: UserName" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,7,75,0"/>
         <Button Content="Logout" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Top" Height="20" Width="60" Margin="0,5,5,0"/>
     </Grid>
 </Window>

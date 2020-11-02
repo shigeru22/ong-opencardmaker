@@ -52,6 +52,7 @@ namespace OpenCardMaker.Windows.GodMode
             cardInst = new CardFilesInstance(this.ongekiPath);
             userOp = new UserOperations(this.configPath);
             List<CardRow> cardList = new List<CardRow>();
+            user = userOp.GetUserData();
 
             try
             {
@@ -68,11 +69,15 @@ namespace OpenCardMaker.Windows.GodMode
             }
 
             InitializeComponent();
+
+            UserName.Text = $"{user.userId}: {user.userData.userName}";
             
             foreach(UserCardData data in card.userCardList)
             {
                 // query card from xml
-                CardRow temp = new CardRow(data.cardId, "", "", data.level, "");
+                CardData card = cardInst.QueryCardData(data.cardId);
+
+                CardRow temp = new CardRow(data.cardId, card.CharaID.str, card.Name.str, data.level, card.SkillID.str);
                 cardList.Add(temp);
                 UserCardListData.Items.Add(temp);
             }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OpenCardMaker
 {
-    struct CardData
+    public struct CardData
     {
         public string dataName;
         public IdStr Name;
@@ -31,13 +31,13 @@ namespace OpenCardMaker
         public string PrintEndDateTime;
     }
 
-    struct IdStr
+    public struct IdStr
     {
         public int id;
         public string str;
     }
 
-    struct UserCardData
+    public struct UserCardData
     {
         public int cardId;
         public int digitalStock;
@@ -55,7 +55,7 @@ namespace OpenCardMaker
         public string created;
     }
 
-    class User
+    public class User
     {
         public int accessCode;
         public string userName;
@@ -112,7 +112,7 @@ namespace OpenCardMaker
         public int lastPlayMusicLevel;
     }
 
-    partial class UserCard
+    public partial class UserCard
     {
         public int userId;
         public int length;
@@ -143,7 +143,7 @@ namespace OpenCardMaker
         }
     }
 
-    partial class UserData
+    public partial class UserData
     {
         public int userId;
         public User userData;
