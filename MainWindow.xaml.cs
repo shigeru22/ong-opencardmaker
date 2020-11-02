@@ -1,4 +1,5 @@
-﻿using OpenCardMaker.Windows;
+﻿using OpenCardMaker.Operations;
+using OpenCardMaker.Windows;
 using OpenCardMaker.Windows.GodMode;
 using System;
 using System.Collections.Generic;
@@ -55,19 +56,39 @@ namespace OpenCardMaker
         void btnOngekiLocationClick(object sender, RoutedEventArgs e)
         {
             OngekiLocationText.Text = FrontEndOperations.Browse();
-            ongekiPath = OngekiLocationText.Text;
+            string temp = OngekiLocationText.Text;
 
-            if (ongekiPath != "") OngekiLocation.Foreground = Brushes.Green;
-            else OngekiLocation.Foreground = Brushes.Red;
+            if (FileChecker.OngekiFolderCheck(temp))
+            {
+                ongekiPath = temp;
+                OngekiLocation.Foreground = Brushes.Green;
+            }
+            else
+            {
+                var dialog = new Dialogs.CustomDialog("Error", "No mu3.exe and mu3_Data folder found.");
+                dialog.ShowDialog();
+
+                OngekiLocation.Foreground = Brushes.Red;
+            }
         }
 
         void btnConfigLocationClick(object sender, RoutedEventArgs e)
         {
             ConfigLocationText.Text = FrontEndOperations.Browse();
-            configPath = ConfigLocationText.Text;
+            string temp = ConfigLocationText.Text;
 
-            if (configPath != "") ConfigLocation.Foreground = Brushes.Green;
-            else ConfigLocation.Foreground = Brushes.Red;
+            if (FileChecker.ConfigFolderCheck(temp))
+            {
+                configPath = temp;
+                ConfigLocation.Foreground = Brushes.Green;
+            }
+            else
+            {
+                var dialog = new Dialogs.CustomDialog("Error", "No related config files found.");
+                dialog.ShowDialog();
+
+                ConfigLocation.Foreground = Brushes.Red;
+            }
         }
 
         void btnGodModeClick(object sender, RoutedEventArgs e)
