@@ -52,7 +52,6 @@ namespace OpenCardMaker.Windows.GodMode
             cardInst = new CardFilesInstance(this.ongekiPath);
             userOp = new UserOperations(this.configPath);
             List<CardRow> cardList = new List<CardRow>();
-            user = userOp.GetUserData();
 
             try
             {
@@ -81,6 +80,22 @@ namespace OpenCardMaker.Windows.GodMode
                 cardList.Add(temp);
                 UserCardListData.Items.Add(temp);
             }
+        }
+
+        public void btnLogout(object sender, RoutedEventArgs e)
+        {
+            // show confirmation dialog later
+            // this time, save it and logout
+
+            userOp.SaveUserCard(card);
+            Closing += BackToMain;
+            Close();
+        }
+
+        public void BackToMain(object sender, EventArgs e)
+        {
+            var window = new MainWindow();
+            window.Show();
         }
     }
 }

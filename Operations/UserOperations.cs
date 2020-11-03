@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace OpenCardMaker.Operations
@@ -33,6 +34,19 @@ namespace OpenCardMaker.Operations
             {
                 string temp = reader.ReadToEnd();
                 return JsonConvert.DeserializeObject<UserCard>(temp);
+            }
+        }
+
+        public int SaveUserCard(UserCard data)
+        {
+            // if not changed, don't save it
+            UserCard temp = GetUserCard();
+            if (temp.length == data.length && Enumerable.SequenceEqual(temp.userCardList, data.userCardList)) return 0;
+            
+            using (StreamWriter writer = new StreamWriter(File.Open($"{path}\\UserCard.json", FileMode.Create)))
+            {
+                writer.Write(JsonConvert.SerializeObject(data, Formatting.Indented));
+                return data.length - temp.length;
             }
         }
     }

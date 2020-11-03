@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenCardMaker.Windows.GodMode"
         mc:Ignorable="d"
-        Title="OpenCardMaker (God Mode)" Height="450" Width="600" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" WindowState="Normal">
+        Title="OpenCardMaker (God Mode)" Height="400" Width="600" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" WindowState="Normal" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="350"/>
@@ -14,11 +14,11 @@
         <TabControl Margin="5,5,5,5">
             <TabItem Header="Card List">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid Name="UserCardListData" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="False">
+                    <DataGrid Name="UserCardListData" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="False" Height="312.04" Width="584">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding CardId}" Width="60" />
                             <DataGridTextColumn Header="Name" Binding="{Binding CardName}" Width="100" />
-                            <DataGridTextColumn Header="Card Title" Binding="{Binding CardTitle}" Width="150"/>
+                            <DataGridTextColumn Header="Card Title" Binding="{Binding CardTitle}" Width="209"/>
                             <DataGridTextColumn Header="Level" Binding="{Binding CardLevel}" Width="40"/>
                             <DataGridTextColumn Header="Skill" Binding="{Binding CardSkill}" Width="150"/>
                         </DataGrid.Columns>
@@ -27,11 +27,11 @@
             </TabItem>
             <TabItem Header="User Settings">
                 <Grid Background="#FFE5E5E5">
-                    <TextBlock HorizontalAlignment="Left" Margin="273,0,0,0" Text="WIP" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                    <TextBlock Text="WIP" TextWrapping="Wrap" Margin="281,148,282,148"/>
                 </Grid>
             </TabItem>
         </TabControl>
         <TextBlock Name="UserName" HorizontalAlignment="Right" Grid.Row="1" Text="UserId: UserName" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,7,75,0"/>
-        <Button Content="Logout" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Top" Height="20" Width="60" Margin="0,5,5,0"/>
+        <Button Content="Logout" Click="btnLogout" HorizontalAlignment="Right" Grid.Row="1" Width="60" Margin="0,5,8,8"/>
     </Grid>
 </Window>
