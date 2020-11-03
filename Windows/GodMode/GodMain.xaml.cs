@@ -75,7 +75,7 @@ namespace OpenCardMaker.Windows.GodMode
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            foreach (var temp in from UserCardData data in card.userCardList// query card from xml
+            foreach (var temp in from UserCardData data in card.userCardList
                                  let card = cardInst.QueryCardData(data.cardId)
                                  let temp = new CardRow(data.cardId, card.CharaID.str, card.Name.str, data.level, card.SkillID.str)
                                  select temp)

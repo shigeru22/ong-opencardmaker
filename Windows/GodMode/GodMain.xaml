@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenCardMaker.Windows.GodMode"
         mc:Ignorable="d"
-        Title="OpenCardMaker (God Mode)" Height="400" Width="600" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" WindowState="Normal" ResizeMode="CanMinimize">
+        Title="OpenCardMaker (God Mode)" Height="400" Width="670" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" WindowState="Normal" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="350"/>
@@ -13,8 +13,12 @@
         </Grid.RowDefinitions>
         <TabControl Margin="5,5,5,5">
             <TabItem Header="Card List">
-                <Grid Background="#FFE5E5E5">
-                    <DataGrid Name="UserCardListData" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="False" Height="312.04" Width="584">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="70"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid Name="UserCardListData" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="False" Height="312.04" Width="584" HorizontalAlignment="Left">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding CardId}" Width="60" />
                             <DataGridTextColumn Header="Name" Binding="{Binding CardName}" Width="100" />
@@ -23,16 +27,22 @@
                             <DataGridTextColumn Header="Skill" Binding="{Binding CardSkill}" Width="150"/>
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Button Content="Add..." Grid.Column="1" HorizontalAlignment="Left" Margin="5,3,0,0" VerticalAlignment="Top" Width="60"/>
+                    <Button Content="Remove..." Grid.Column="1" HorizontalAlignment="Center" Margin="0,210,0,0" VerticalAlignment="Top" Width="60"/>
+                    <Button Content="Details" Grid.Column="1" HorizontalAlignment="Center" Margin="0,235,0,0" VerticalAlignment="Top" Width="60"/>
+                    <Separator Grid.Column="1" Margin="5,260,5,50" Height="2"/>
+                    <Button Content="Set Level" Grid.Column="1" HorizontalAlignment="Center" Margin="0,267,0,0" VerticalAlignment="Top" Width="60"/>
+                    <Button Content="Up Cap" Grid.Column="1" HorizontalAlignment="Center" Margin="0,292,0,0" VerticalAlignment="Top" Width="60"/>
                 </Grid>
             </TabItem>
             <TabItem Header="User Settings">
                 <Grid Background="#FFE5E5E5">
-                    <TextBlock Text="WIP" TextWrapping="Wrap" Margin="281,148,282,148"/>
+                    <TextBlock Text="WIP" TextWrapping="Wrap" Margin="281,148,282,148" HorizontalAlignment="Center"/>
                 </Grid>
             </TabItem>
         </TabControl>
         <TextBlock Name="UserName" HorizontalAlignment="Right" Grid.Row="1" Text="UserId: UserName" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,7,75,0"/>
         <Button Content="Logout" Click="btnLogout" HorizontalAlignment="Right" Grid.Row="1" Width="60" Margin="0,5,8,8"/>
-        <TextBlock Name="DiagnosticLoadTime" HorizontalAlignment="Right" Margin="0,7,411,0" Grid.Row="1" Text="Loaded in ?s" TextWrapping="Wrap" VerticalAlignment="Top" Width="179"/>
+        <TextBlock Name="DiagnosticLoadTime" Margin="8,7,481,0" Grid.Row="1" Text="Loaded in ?s" TextWrapping="Wrap" VerticalAlignment="Top"/>
     </Grid>
 </Window>
