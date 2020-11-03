@@ -33,5 +33,6 @@
         </TabControl>
         <TextBlock Name="UserName" HorizontalAlignment="Right" Grid.Row="1" Text="UserId: UserName" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,7,75,0"/>
         <Button Content="Logout" Click="btnLogout" HorizontalAlignment="Right" Grid.Row="1" Width="60" Margin="0,5,8,8"/>
+        <TextBlock Name="DiagnosticLoadTime" HorizontalAlignment="Right" Margin="0,7,411,0" Grid.Row="1" Text="Loaded in ?s" TextWrapping="Wrap" VerticalAlignment="Top" Width="179"/>
     </Grid>
 </Window>

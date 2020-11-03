@@ -1,5 +1,4 @@
-﻿using OpenCardMaker.Operations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -11,6 +10,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using OpenCardMaker.Operations;
+using System.Linq;
 
 namespace OpenCardMaker.Windows.GodMode
 {
@@ -70,16 +72,20 @@ namespace OpenCardMaker.Windows.GodMode
             InitializeComponent();
 
             UserName.Text = $"{user.userId}: {user.userData.userName}";
-            
-            foreach(UserCardData data in card.userCardList)
-            {
-                // query card from xml
-                CardData card = cardInst.QueryCardData(data.cardId);
 
-                CardRow temp = new CardRow(data.cardId, card.CharaID.str, card.Name.str, data.level, card.SkillID.str);
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            foreach (var temp in from UserCardData data in card.userCardList// query card from xml
+                                 let card = cardInst.QueryCardData(data.cardId)
+                                 let temp = new CardRow(data.cardId, card.CharaID.str, card.Name.str, data.level, card.SkillID.str)
+                                 select temp)
+            {
                 cardList.Add(temp);
                 UserCardListData.Items.Add(temp);
             }
+            stopwatch.Stop();
+
+            DiagnosticLoadTime.Text = $"Loaded in {stopwatch.Elapsed.Seconds}.{stopwatch.Elapsed.Milliseconds}s";
         }
 
         public void btnLogout(object sender, RoutedEventArgs e)
