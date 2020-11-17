@@ -13,6 +13,8 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using OpenCardMaker.Operations;
 using System.Linq;
+using OpenCardMaker.Dialogs;
+using OpenCardMaker.Dialogs.GodMode;
 
 namespace OpenCardMaker.Windows.GodMode
 {
@@ -21,13 +23,6 @@ namespace OpenCardMaker.Windows.GodMode
     /// </summary>
     public partial class GodMain : Window
     {
-        readonly string ongekiPath;
-        readonly string configPath;
-        CardFilesInstance cardInst;
-        UserOperations userOp;
-        UserData user;
-        UserCard card;
-
         struct CardRow
         {
             public string CardId { get; set; }
@@ -44,6 +39,53 @@ namespace OpenCardMaker.Windows.GodMode
                 CardLevel = level.ToString();
                 CardSkill = skill;
             }
+
+            public CardRow(string id, string name, string title, int level, string skill)
+            {
+                CardId = id;
+                CardName = name;
+                CardTitle = title;
+                CardLevel = level.ToString();
+                CardSkill = skill;
+            }
+        }
+
+        readonly string ongekiPath;
+        readonly string configPath;
+        CardFilesInstance cardInst;
+        UserOperations userOp;
+        UserData user;
+        UserCard card;
+
+        List<CardRow> cardList = new List<CardRow>();
+
+        void RefreshCardList()
+        {
+            int total = 0;
+
+            cardList.Clear();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            foreach (CardRow temp in from UserCardData data in card.userCardList
+                                 let card = cardInst.QueryCardData(data.cardId)
+                                 let temp = new CardRow(data.cardId, card.CharaID.str, card.Name.str, data.level, card.SkillID.str)
+                                 select temp)
+            {
+                cardList.Add(temp);
+                total++;
+            }
+            stopwatch.Stop();
+
+            UserCardListData.ItemsSource = null;
+            UserCardListData.ItemsSource = cardList;
+
+            DiagnosticLoadTime.Text = $"Loaded {total} cards in {(float)stopwatch.ElapsedMilliseconds / 1000}s";
+        }
+
+        void AddCardToList(CardData target)
+        {
+            cardList.Add(new CardRow(target.dataName.Substring(4), target.CharaID.str, target.Name.str, 1, target.SkillID.str));
+            DiagnosticLoadTime.Text = string.Empty;
         }
 
         public GodMain(string ongekiPath, string configPath)
@@ -53,7 +95,6 @@ namespace OpenCardMaker.Windows.GodMode
 
             cardInst = new CardFilesInstance(this.ongekiPath);
             userOp = new UserOperations(this.configPath);
-            List<CardRow> cardList = new List<CardRow>();
 
             try
             {
@@ -72,20 +113,7 @@ namespace OpenCardMaker.Windows.GodMode
             InitializeComponent();
 
             UserName.Text = $"{user.userId}: {user.userData.userName}";
-
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            foreach (var temp in from UserCardData data in card.userCardList
-                                 let card = cardInst.QueryCardData(data.cardId)
-                                 let temp = new CardRow(data.cardId, card.CharaID.str, card.Name.str, data.level, card.SkillID.str)
-                                 select temp)
-            {
-                cardList.Add(temp);
-                UserCardListData.Items.Add(temp);
-            }
-            stopwatch.Stop();
-
-            DiagnosticLoadTime.Text = $"Loaded in {stopwatch.Elapsed.Seconds}.{stopwatch.Elapsed.Milliseconds}s";
+            RefreshCardList();
         }
 
         public void btnLogout(object sender, RoutedEventArgs e)
@@ -102,6 +130,53 @@ namespace OpenCardMaker.Windows.GodMode
         {
             var window = new MainWindow();
             window.Show();
+        }
+
+        public void btnAddClick(object sender, RoutedEventArgs e)
+        {
+            // show window, select card, add to usercardlistdata and usercardlist
+            var dialog = new AddCard(ref cardInst);
+            bool? result = dialog.ShowDialog();
+
+            switch(result)
+            {
+                case true:
+                    MessageBox.Show(dialog.target.ToString());
+                    card.AddCard(dialog.target, dialog.skillId);
+                    RefreshCardList();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // WIP
+        public void btnRemoveClick(object sender, RoutedEventArgs e)
+        {
+            CardRow selected = (CardRow)UserCardListData.SelectedItem;
+
+            var result = MessageBox.Show("Confirm deletion?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    int target;
+                    try
+                    {
+                        target = int.Parse(selected.CardId);
+                    }
+                    catch(Exception ex)
+                    {
+                        CustomDialog dialog = new CustomDialog("Error", ex.Message);
+                        dialog.ShowDialog();
+                        break;
+                    }
+                    card.RemoveCard(target);
+                    RefreshCardList();
+                    break;
+                case MessageBoxResult.No:
+                    break;
+                // put log on default
+            }
         }
     }
 }

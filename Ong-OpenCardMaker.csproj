@@ -18,4 +18,16 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Dialogs\GodMode\AddCardConfirm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Dialogs\GodMode\AddCardConfirm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace OpenCardMaker.Operations
 {
-    class CardFilesInstance
+    public class CardFilesInstance
     {
         readonly string path;
 
@@ -38,10 +38,12 @@ namespace OpenCardMaker.Operations
 
         public CardData QueryCardData(int cardId)
         {
-            if (Directory.Exists($"{path}\\card{cardId}"))
+            string temp = cardId.ToString("D6");
+            if (Directory.Exists($"{path}\\card{temp}"))
             {
                 CardData target = new CardData();
-                using (Stream xml = new FileStream($"{path}\\card{cardId}\\Card.xml", FileMode.Open))
+
+                using (Stream xml = new FileStream($"{path}\\card{temp}\\Card.xml", FileMode.Open))
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(CardData));
                     target = (CardData)serializer.Deserialize(xml);
@@ -50,6 +52,28 @@ namespace OpenCardMaker.Operations
                 return target;
             }
             else throw new InvalidCardIdException();
+        }
+
+        public CardData QueryCardData(string cardId)
+        {
+            CardData target;
+            if (cardId.Substring(0, 4).Equals("card"))
+            {
+                int temp;
+                try
+                {
+                    temp = int.Parse(cardId.Substring(4));
+                }
+                catch (Exception)
+                {
+                    // throw later
+                    return new CardData();
+                }
+                target = QueryCardData(temp);
+            }
+            else target = QueryCardData(cardId);
+
+            return target;
         }
     }
 }
