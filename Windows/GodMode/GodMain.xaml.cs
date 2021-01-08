@@ -75,8 +75,6 @@ namespace OpenCardMaker.Windows.GodMode
                 total++;
             }
             stopwatch.Stop();
-
-            UserCardListData.ItemsSource = null;
             UserCardListData.ItemsSource = cardList;
 
             DiagnosticLoadTime.Text = $"Loaded {total} cards in {(float)stopwatch.ElapsedMilliseconds / 1000}s";
@@ -150,7 +148,6 @@ namespace OpenCardMaker.Windows.GodMode
             }
         }
 
-        // WIP
         public void btnRemoveClick(object sender, RoutedEventArgs e)
         {
             CardRow selected = (CardRow)UserCardListData.SelectedItem;
