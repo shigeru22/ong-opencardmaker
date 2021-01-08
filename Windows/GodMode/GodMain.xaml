@@ -29,7 +29,7 @@
                     </DataGrid>
                     <Button Content="Add..." Click="btnAddClick" Grid.Column="1" HorizontalAlignment="Left" Margin="5,3,0,0" VerticalAlignment="Top" Width="60"/>
                     <Button Content="Remove..." Click="btnRemoveClick" Grid.Column="1" HorizontalAlignment="Center" Margin="0,210,0,0" VerticalAlignment="Top" Width="60"/>
-                    <Button Content="Details" Grid.Column="1" HorizontalAlignment="Center" Margin="0,235,0,0" VerticalAlignment="Top" Width="60"/>
+                    <Button Content="Details" Click="btnDetailsClick" Grid.Column="1" HorizontalAlignment="Center" Margin="0,235,0,0" VerticalAlignment="Top" Width="60"/>
                     <Separator Grid.Column="1" Margin="5,260,5,50" Height="2"/>
                     <Button Content="Set Level" Grid.Column="1" HorizontalAlignment="Center" Margin="0,267,0,0" VerticalAlignment="Top" Width="60"/>
                     <Button Content="Up Cap" Grid.Column="1" HorizontalAlignment="Center" Margin="0,292,0,0" VerticalAlignment="Top" Width="60"/>

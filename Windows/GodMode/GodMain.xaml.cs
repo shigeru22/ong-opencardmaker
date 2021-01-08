@@ -175,5 +175,13 @@ namespace OpenCardMaker.Windows.GodMode
                 // put log on default
             }
         }
+
+        public void btnDetailsClick(object sender, RoutedEventArgs e)
+        {
+            CardRow selected = (CardRow)UserCardListData.SelectedItem;
+
+            CardDetails dialog = new CardDetails(selected.CardId.ToString(), cardInst.QueryCardData(selected.CardId));
+            dialog.ShowDialog();
+        }
     }
 }

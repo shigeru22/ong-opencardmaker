@@ -21,14 +21,19 @@ namespace OpenCardMaker.Dialogs.GodMode
     {
         public CardDetails(string cardId, CardData target)
         {
+            InitializeComponent();
+
             CardIDBox.Text = cardId;
             CardNameBox.Text = target.Name.str;
             CardAttributeBox.Text = target.Attribute;
             CardSkillBox.Text = target.SkillID.str;
             if (target.LicenseID.id == 0) CopyrightBlock.Text = string.Empty;
             else CopyrightBlock.Text = target.LicenseID.str;
+        }
 
-            InitializeComponent();
+        public void btnCloseClick(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

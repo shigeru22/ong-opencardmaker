@@ -35,6 +35,6 @@
                 <TextBlock Name="CopyrightBlock" Grid.Row="5" HorizontalAlignment="Right" Margin="5,0,15,0" Text="[Copyright]" TextWrapping="Wrap" VerticalAlignment="Center"/>
             </Grid>
         </Grid>
-        <Button Click="btnCancelClick" Grid.Row="1" Content="Close" HorizontalAlignment="Center" Margin="0,5,0,0" Width="60" Height="20" VerticalAlignment="Top"/>
+        <Button Click="btnCloseClick" Grid.Row="1" Content="Close" HorizontalAlignment="Center" Margin="0,5,0,0" Width="60" Height="20" VerticalAlignment="Top"/>
     </Grid>
 </Window>

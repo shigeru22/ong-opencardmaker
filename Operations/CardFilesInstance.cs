@@ -57,21 +57,19 @@ namespace OpenCardMaker.Operations
         public CardData QueryCardData(string cardId)
         {
             CardData target;
-            if (cardId.Substring(0, 4).Equals("card"))
+            string temp;
+
+            if (cardId.Substring(0, 4).Equals("card")) temp = cardId.Substring(4);
+            else temp = cardId;
+            try
             {
-                int temp;
-                try
-                {
-                    temp = int.Parse(cardId.Substring(4));
-                }
-                catch (Exception)
-                {
-                    // throw later
-                    return new CardData();
-                }
-                target = QueryCardData(temp);
+                target = QueryCardData(Int32.Parse(temp));
             }
-            else target = QueryCardData(cardId);
+            catch (Exception)
+            {
+                // throw later
+                return new CardData();
+            }
 
             return target;
         }
