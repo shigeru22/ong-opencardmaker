@@ -75,6 +75,8 @@ namespace OpenCardMaker.Windows.GodMode
                 total++;
             }
             stopwatch.Stop();
+
+            UserCardListData.ItemsSource = null;
             UserCardListData.ItemsSource = cardList;
 
             DiagnosticLoadTime.Text = $"Loaded {total} cards in {(float)stopwatch.ElapsedMilliseconds / 1000}s";
@@ -119,7 +121,7 @@ namespace OpenCardMaker.Windows.GodMode
             // show confirmation dialog later
             // this time, save it and logout
 
-            userOp.SaveUserCard(card);
+            // userOp.SaveUserCard(card);
             Closing += BackToMain;
             Close();
         }
@@ -182,6 +184,50 @@ namespace OpenCardMaker.Windows.GodMode
 
             CardDetails dialog = new CardDetails(selected.CardId.ToString(), cardInst.QueryCardData(selected.CardId));
             dialog.ShowDialog();
+        }
+
+        public void btnLevelUpClick(object sender, RoutedEventArgs e)
+        {
+            CardRow selected = (CardRow)UserCardListData.SelectedItem;
+
+            int cardId = 0, level = 0, maxLevel = 0;
+            foreach (UserCardData temp in card.userCardList)
+            {
+                if (temp.cardId.ToString() == selected.CardId)
+                {
+                    cardId = temp.cardId;
+                    level = temp.level;
+                    maxLevel = temp.maxLevel;
+                    break;
+                }
+            }
+
+            if(cardId == 0)
+            {
+                // card not found error
+                return;
+            }
+
+            IncreaseCardLevel dialog = new IncreaseCardLevel(level, maxLevel);
+            dialog.ShowDialog();
+
+            switch(dialog.DialogResult)
+            {
+                case true:
+                    int length = card.userCardList.Length;
+                    for(int i = 0; i < length; i++)
+                    {
+                        if(card.userCardList[i].cardId == cardId)
+                        {
+                            card.userCardList[i].level += dialog.levelNumber;
+                            break;
+                        }
+                    }
+                    break;
+                default: return;
+            }
+
+            RefreshCardList();
         }
     }
 }

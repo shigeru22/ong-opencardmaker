@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenCardMaker.Dialogs.GodMode"
         mc:Ignorable="d"
-        Title="Increase Level" Height="157" Width="250">
+        Title="Increase Level" Height="157" Width="250" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
@@ -13,25 +13,25 @@
             <RowDefinition Height="30" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBlock Text="Increase card level by (maximum ?):" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Name="MainText" Text="Increase card level by (maximum ?):" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="0.4*" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Content="-" HorizontalAlignment="Right" Margin="0,0,5,0" VerticalAlignment="Center" Width="25"/>
-            <TextBlock Text="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <Button Content="+" Grid.Column="2" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center" Width="25"/>
+            <Button Name="DecreaseLevelButton" Content="-" Click="btnDecreaseLevel" HorizontalAlignment="Right" Margin="0,0,5,0" VerticalAlignment="Center" Width="25"/>
+            <TextBlock Name="LevelNumberText" Text="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Button Name="IncreaseLevelButton" Content="+" Click="btnIncreaseLevel" Grid.Column="2" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center" Width="25"/>
         </Grid>
-        <TextBlock Text="Target level: ? -> ?" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock Name="TargetLevelText" Text="Target level: ? -> ?" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Content="OK" HorizontalAlignment="Right" Margin="0,5,5,0" VerticalAlignment="Top" Width="60" />
-            <Button Content="Cancel" Grid.Column="1" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="60" />
+            <Button Content="OK" Click="btnOKClick" HorizontalAlignment="Right" Margin="0,5,5,0" VerticalAlignment="Top" Width="60" />
+            <Button Content="Cancel" Click="btnCancelClick" Grid.Column="1" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="60" />
         </Grid>
     </Grid>
 </Window>
