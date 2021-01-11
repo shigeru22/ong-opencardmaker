@@ -32,7 +32,7 @@
                     <Button Content="Details" Click="btnDetailsClick" Grid.Column="1" HorizontalAlignment="Center" Margin="0,235,0,0" VerticalAlignment="Top" Width="60"/>
                     <Separator Grid.Column="1" Margin="5,260,5,50" Height="2"/>
                     <Button Content="Up Level" Click="btnLevelUpClick" Grid.Column="1" HorizontalAlignment="Center" Margin="0,267,0,0" VerticalAlignment="Top" Width="60"/>
-                    <Button Content="Up Cap" Grid.Column="1" HorizontalAlignment="Center" Margin="0,292,0,0" VerticalAlignment="Top" Width="60"/>
+                    <Button Content="Up Cap" Click="btnCapUpClick" Grid.Column="1" HorizontalAlignment="Center" Margin="0,292,0,0" VerticalAlignment="Top" Width="60"/>
                 </Grid>
             </TabItem>
             <TabItem Header="User Settings">

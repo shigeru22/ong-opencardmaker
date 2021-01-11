@@ -229,5 +229,59 @@ namespace OpenCardMaker.Windows.GodMode
 
             RefreshCardList();
         }
+
+        public void btnCapUpClick(object sender, RoutedEventArgs e)
+        {
+            CardRow selected = (CardRow)UserCardListData.SelectedItem;
+
+            int cardId = 0, cap = 0, maxCap = 0;
+            foreach(UserCardData temp in card.userCardList)
+            {
+                if(temp.cardId.ToString() == selected.CardId)
+                {
+                    cardId = temp.cardId;
+                    cap = temp.maxLevel;
+
+                    switch(cardInst.QueryCardData(cardId).Rarity)
+                    {
+                        case "N": maxCap = 100; break;
+                        case "R": maxCap = 70; break;
+                        case "SR": maxCap = 70; break;
+                        case "SSR": maxCap = 70; break;
+                        default:
+                            CustomDialog error = new CustomDialog("Error", "Unrecognized rarity attribute.");
+                            error.ShowDialog();
+                            return;
+                    }
+                }
+            }
+
+            if (cardId == 0)
+            {
+                // card not found error
+                return;
+            }
+
+            IncreaseCardCap dialog = new IncreaseCardCap(cap, maxCap);
+            dialog.ShowDialog();
+
+            switch(dialog.DialogResult)
+            {
+                case true:
+                    int length = card.userCardList.Length;
+                    for (int i = 0; i < length; i++)
+                    {
+                        if (card.userCardList[i].cardId == cardId)
+                        {
+                            card.userCardList[i].maxLevel += dialog.capNumber;
+                            break;
+                        }
+                    }
+                    break;
+                default: return;
+            }
+
+            RefreshCardList();
+        }
     }
 }
