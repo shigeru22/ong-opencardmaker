@@ -224,6 +224,12 @@ namespace OpenCardMaker.Windows.GodMode
                 return;
             }
 
+            if(level == maxLevel)
+            {
+                MessageBox.Show("Maximum level reached for the selected card.\nIncrease the cap by using the Up Cap button.", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+
             IncreaseCardLevel dialog = new IncreaseCardLevel(level, maxLevel);
             dialog.ShowDialog();
 
@@ -275,6 +281,12 @@ namespace OpenCardMaker.Windows.GodMode
             if (cardId == 0)
             {
                 // card not found error
+                return;
+            }
+
+            if(cap == maxCap)
+            {
+                MessageBox.Show("The selected card is already in its maximum level cap.", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
 

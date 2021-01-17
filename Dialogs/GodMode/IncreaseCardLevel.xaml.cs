@@ -24,8 +24,6 @@ namespace OpenCardMaker.Dialogs.GodMode
 
         public IncreaseCardLevel(int level, int maxLevel)
         {
-            // add max level check
-
             levelNumber = 1;
             this.level = level;
             this.maxLevel = maxLevel;
