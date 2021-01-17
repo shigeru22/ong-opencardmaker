@@ -114,6 +114,22 @@ namespace OpenCardMaker.Windows.GodMode
 
             UserName.Text = $"{user.userId}: {user.userData.userName}";
             RefreshCardList();
+
+            Closing += GodMain_Closing;
+        }
+
+        private void GodMain_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var close = MessageBox.Show("Exit the application?", "Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            switch(close)
+            {
+                case MessageBoxResult.No:
+                    e.Cancel = true;
+                    break;
+                default:
+                    // userOp.SaveUserCard(card);
+                    break;
+            }
         }
 
         public void btnLogout(object sender, RoutedEventArgs e)
