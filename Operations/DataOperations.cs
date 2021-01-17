@@ -20,5 +20,10 @@ namespace OpenCardMaker.Operations
 
             return temp;
         }
+
+        internal static string FileNotFoundText(string path)
+        {
+            return $"{path} not found.";
+        }
     }
 }
