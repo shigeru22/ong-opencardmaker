@@ -134,11 +134,16 @@ namespace OpenCardMaker.Windows.GodMode
 
         public void btnLogout(object sender, RoutedEventArgs e)
         {
-            // show confirmation dialog later
-            // this time, save it and logout
+            var result = MessageBox.Show("Save to configuration and logout?", "Logout", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            switch(result)
+            {
+                case MessageBoxResult.Yes: break;
+                default: return;
+            }
 
             // userOp.SaveUserCard(card);
             Closing += BackToMain;
+            Closing -= GodMain_Closing; // probably find elegant way?
             Close();
         }
 
@@ -150,7 +155,6 @@ namespace OpenCardMaker.Windows.GodMode
 
         public void btnAddClick(object sender, RoutedEventArgs e)
         {
-            // show window, select card, add to usercardlistdata and usercardlist
             var dialog = new AddCard(ref cardInst);
             bool? result = dialog.ShowDialog();
 
@@ -220,7 +224,7 @@ namespace OpenCardMaker.Windows.GodMode
 
             if(cardId == 0)
             {
-                // card not found error
+                MessageBox.Show("Specified card ID could not be found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -280,7 +284,7 @@ namespace OpenCardMaker.Windows.GodMode
 
             if (cardId == 0)
             {
-                // card not found error
+                MessageBox.Show("Specified card ID could not be found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
