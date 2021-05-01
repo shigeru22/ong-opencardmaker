@@ -153,6 +153,12 @@ namespace OpenCardMaker.Windows.GodMode
             window.Show();
         }
 
+        public void ViewAllCardsClick(object sender, RoutedEventArgs e)
+        {
+            var window = new AllCardsWindow(cardInst);
+            window.Show();
+        }
+
         public void btnAddClick(object sender, RoutedEventArgs e)
         {
             var dialog = new AddCard(ref cardInst);
