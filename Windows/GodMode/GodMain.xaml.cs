@@ -159,6 +159,23 @@ namespace OpenCardMaker.Windows.GodMode
             window.Show();
         }
 
+        public void SaveCardsListClick(object sender, RoutedEventArgs e)
+        {
+            if(userOp.SaveUserCard(card) != 0) MessageBox.Show("Card data saved.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        public void RevertToSavedClick(object sender, RoutedEventArgs e)
+        {
+            var confirm = MessageBox.Show("Discard all changes and revert to last saved data?", "Revert to Saved", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            switch(confirm)
+            {
+                case MessageBoxResult.Yes:
+                    card = userOp.GetUserCard();
+                    RefreshCardList();
+                    break;
+            }
+        }
+
         public void ExitApplicationClick(object sender, RoutedEventArgs e)
         {
             Close();

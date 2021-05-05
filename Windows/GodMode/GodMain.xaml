@@ -16,8 +16,8 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="_View All Cards List" Click="ViewAllCardsClick"/>
-                    <MenuItem Header="_Save" />
-                    <MenuItem Header="_Revert to Saved" />
+                    <MenuItem Header="_Save" Click="SaveCardsListClick" />
+                    <MenuItem Header="_Revert to Saved" Click="RevertToSavedClick" />
                     <Separator />
                     <MenuItem Header="_Exit" Click="ExitApplicationClick" />
                 </MenuItem>
