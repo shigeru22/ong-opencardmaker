@@ -159,6 +159,11 @@ namespace OpenCardMaker.Windows.GodMode
             window.Show();
         }
 
+        public void ExitApplicationClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
         public void btnAddClick(object sender, RoutedEventArgs e)
         {
             var dialog = new AddCard(ref cardInst);
