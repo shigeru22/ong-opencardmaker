@@ -176,6 +176,35 @@ namespace OpenCardMaker.Windows.GodMode
             }
         }
 
+        public void CopyDataClick(object sender, RoutedEventArgs e)
+        {
+            CardRow selected = (CardRow)UserCardListData.SelectedItem;
+            string output = string.Empty;
+
+            // MessageBox.Show(((MenuItem)sender).Name);
+            string menu = ((MenuItem)sender).Name;
+            switch(menu)
+            {
+                case "CopyID":
+                    output = selected.CardId.ToString();
+                    break;
+                case "CopyName":
+                    output = selected.CardName.ToString();
+                    break;
+                case "CopyTitle":
+                    output = selected.CardTitle.ToString();
+                    break;
+                case "CopyLevel":
+                    output = selected.CardLevel.ToString();
+                    break;
+                case "CopySkill":
+                    output = selected.CardSkill.ToString();
+                    break;
+            }
+
+            Clipboard.SetText(output);
+        }
+
         public void ExitApplicationClick(object sender, RoutedEventArgs e)
         {
             Close();

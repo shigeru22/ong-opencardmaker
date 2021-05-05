@@ -23,11 +23,11 @@
                 </MenuItem>
                 <MenuItem Header="_Edit">
                     <MenuItem Name="CopyMenuItem" Header="_Copy">
-                        <MenuItem Header="Card ID" />
-                        <MenuItem Header="Chara Name" />
-                        <MenuItem Header="Card Title" />
-                        <MenuItem Header="Card Level" />
-                        <MenuItem Header="Card Skill" />
+                        <MenuItem Name="CopyID" Header="Card ID" Click="CopyDataClick" />
+                        <MenuItem Name="CopyName" Header="Chara Name" Click="CopyDataClick" />
+                        <MenuItem Name="CopyTitle" Header="Card Title" Click="CopyDataClick" />
+                        <MenuItem Name="CopyLevel" Header="Card Level" Click="CopyDataClick" />
+                        <MenuItem Name="CopySkill" Header="Card Skill" Click="CopyDataClick" />
                     </MenuItem>
                 </MenuItem>
             </Menu>
