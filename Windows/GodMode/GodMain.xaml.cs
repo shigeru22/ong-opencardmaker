@@ -183,24 +183,11 @@ namespace OpenCardMaker.Windows.GodMode
 
             // MessageBox.Show(((MenuItem)sender).Name);
             string menu = ((MenuItem)sender).Name;
-            switch(menu)
-            {
-                case "CopyID":
-                    output = selected.CardId.ToString();
-                    break;
-                case "CopyName":
-                    output = selected.CardName.ToString();
-                    break;
-                case "CopyTitle":
-                    output = selected.CardTitle.ToString();
-                    break;
-                case "CopyLevel":
-                    output = selected.CardLevel.ToString();
-                    break;
-                case "CopySkill":
-                    output = selected.CardSkill.ToString();
-                    break;
-            }
+            if(menu.Contains("CopyID")) output = selected.CardId;
+            else if(menu.Contains("CopyName")) output = selected.CardName;
+            else if(menu.Contains("CopyTitle")) output = selected.CardTitle;
+            else if(menu.Contains("CopyLevel")) output = selected.CardLevel;
+            else if(menu.Contains("CopySkill")) output = selected.CardSkill;
 
             Clipboard.SetText(output);
         }

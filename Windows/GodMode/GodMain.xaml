@@ -39,7 +39,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="70"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Name="UserCardListData" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="False" Height="312.04" Width="584" HorizontalAlignment="Left">
+                    <DataGrid Name="UserCardListData" IsReadOnly="True" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="False" Height="312.04" Width="584" HorizontalAlignment="Left">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding CardId}" Width="60" />
                             <DataGridTextColumn Header="Name" Binding="{Binding CardName}" Width="100" />
@@ -47,6 +47,17 @@
                             <DataGridTextColumn Header="Level" Binding="{Binding CardLevel}" Width="40"/>
                             <DataGridTextColumn Header="Skill" Binding="{Binding CardSkill}" Width="150"/>
                         </DataGrid.Columns>
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Copy">
+                                    <MenuItem Name="ContextCopyID" Header="Card ID" Click="CopyDataClick" />
+                                    <MenuItem Name="ContextCopyName" Header="Chara Name" Click="CopyDataClick" />
+                                    <MenuItem Name="ContextCopyTitle" Header="Card Title" Click="CopyDataClick" />
+                                    <MenuItem Name="ContextCopyLevel" Header="Card Level" Click="CopyDataClick" />
+                                    <MenuItem Name="ContextCopySkill" Header="Card Skill" Click="CopyDataClick" />
+                                </MenuItem>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
                     </DataGrid>
                     <Button Content="Add..." Click="btnAddClick" Grid.Column="1" HorizontalAlignment="Left" Margin="5,3,0,0" VerticalAlignment="Top" Width="60"/>
                     <Button Content="Remove..." Click="btnRemoveClick" Grid.Column="1" HorizontalAlignment="Center" Margin="0,210,0,0" VerticalAlignment="Top" Width="60"/>
