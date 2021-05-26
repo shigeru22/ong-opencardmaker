@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Drawing;
+using OpenCardMaker.Operations.AssetsTools;
 
 namespace OpenCardMaker.Dialogs.GodMode
 {
@@ -27,6 +29,21 @@ namespace OpenCardMaker.Dialogs.GodMode
             CardNameBox.Text = target.Name.str;
             CardAttributeBox.Text = target.Attribute;
             CardSkillBox.Text = target.SkillID.str;
+            if (target.LicenseID.id == 0) CopyrightBlock.Text = string.Empty;
+            else CopyrightBlock.Text = target.LicenseID.str;
+        }
+
+        public CardDetails(string cardId, CardData target, Bitmap image)
+        {
+            InitializeComponent();
+
+            CardIDBox.Text = cardId;
+            CardNameBox.Text = target.Name.str;
+            CardAttributeBox.Text = target.Attribute;
+            CardSkillBox.Text = target.SkillID.str;
+
+            CardImage.Source = BitmapExtractor.BitmapToImageSource(image);
+
             if (target.LicenseID.id == 0) CopyrightBlock.Text = string.Empty;
             else CopyrightBlock.Text = target.LicenseID.str;
         }

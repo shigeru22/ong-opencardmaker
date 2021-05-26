@@ -5,19 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenCardMaker.Dialogs.GodMode"
         mc:Ignorable="d"
-        Title="Card Info" Height="424" Width="500">
+        Title="Card Info" Height="256" Width="500">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="342"/>
+            <RowDefinition Height="160"/>
             <RowDefinition Height="25"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="118"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image HorizontalAlignment="Left" Width="230" Height="322" Margin="15,15,0,0" VerticalAlignment="Top"/>
+            <Image HorizontalAlignment="Left" Width="110" Height="150" Margin="15,15,0,0" VerticalAlignment="Top"/>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="45"/>
@@ -41,6 +41,9 @@
         </Grid>
         <TextBlock HorizontalAlignment="Center" Grid.Row="1" Text="Insert this card?" TextWrapping="Wrap" VerticalAlignment="Center"/>
         <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

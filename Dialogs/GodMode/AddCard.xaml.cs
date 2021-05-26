@@ -23,10 +23,12 @@ namespace OpenCardMaker.Dialogs.GodMode
         public int skillId { get; private set; }
 
         CardFilesInstance _inst;
+        CardAssetInstance _asset;
 
-        public AddCard(ref CardFilesInstance cardFilesInstance)
+        public AddCard(ref CardFilesInstance cardFilesInstance, ref CardAssetInstance cardAssetInstance)
         {
             _inst = cardFilesInstance;
+            _asset = cardAssetInstance;
 
             InitializeComponent();
             CardIDEntry.Text = string.Empty;
@@ -54,8 +56,8 @@ namespace OpenCardMaker.Dialogs.GodMode
                 return;
             }
 
-            CardData temp = _inst.QueryCardData(cardId); // handle exception later
-            var confirm = new AddCardConfirm(temp);
+            CardData temp = _inst.QueryCardData(cardId.ToString("D6")); // handle exception later
+            var confirm = new AddCardConfirm(temp, _asset.GetImage(cardId.ToString("D6")));
             bool? result = confirm.ShowDialog();
 
             switch(result)

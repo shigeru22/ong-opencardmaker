@@ -53,6 +53,7 @@ namespace OpenCardMaker.Windows.GodMode
         readonly string ongekiPath;
         readonly string configPath;
         CardFilesInstance cardInst;
+        CardAssetInstance assetsInst;
         UserOperations userOp;
         UserData user;
         UserCard card;
@@ -94,6 +95,7 @@ namespace OpenCardMaker.Windows.GodMode
             this.configPath = configPath;
 
             cardInst = new CardFilesInstance(this.ongekiPath);
+            assetsInst = new CardAssetInstance(this.ongekiPath);
             userOp = new UserOperations(this.configPath);
 
             try
@@ -199,13 +201,13 @@ namespace OpenCardMaker.Windows.GodMode
 
         public void btnAddClick(object sender, RoutedEventArgs e)
         {
-            var dialog = new AddCard(ref cardInst);
+            var dialog = new AddCard(ref cardInst, ref assetsInst);
             bool? result = dialog.ShowDialog();
 
             switch(result)
             {
                 case true:
-                    MessageBox.Show(dialog.target.ToString());
+                    // MessageBox.Show(dialog.target.ToString());
                     card.AddCard(dialog.target, dialog.skillId);
                     RefreshCardList();
                     break;
@@ -246,7 +248,7 @@ namespace OpenCardMaker.Windows.GodMode
         {
             CardRow selected = (CardRow)UserCardListData.SelectedItem;
 
-            CardDetails dialog = new CardDetails(selected.CardId.ToString(), cardInst.QueryCardData(selected.CardId));
+            CardDetails dialog = new CardDetails(selected.CardId, cardInst.QueryCardData(selected.CardId), assetsInst.GetImage(selected.CardId));
             dialog.ShowDialog();
         }
 

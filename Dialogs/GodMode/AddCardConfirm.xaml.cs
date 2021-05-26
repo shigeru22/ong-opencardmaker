@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Drawing;
+using OpenCardMaker.Operations.AssetsTools;
 
 namespace OpenCardMaker.Dialogs.GodMode
 {
@@ -25,6 +27,21 @@ namespace OpenCardMaker.Dialogs.GodMode
             CardNameBox.Text = card.CharaID.str;
             CardAttributeBox.Text = card.Attribute;
             CardSkillBox.Text = card.SkillID.str;
+            if (card.LicenseID.id == 0) CopyrightBlock.Text = string.Empty;
+            else CopyrightBlock.Text = card.LicenseID.str;
+        }
+
+        public AddCardConfirm(CardData card, Bitmap image)
+        {
+            InitializeComponent();
+
+            CardIDBox.Text = card.dataName.Substring(4);
+            CardNameBox.Text = card.CharaID.str;
+            CardAttributeBox.Text = card.Attribute;
+            CardSkillBox.Text = card.SkillID.str;
+
+            CardImage.Source = BitmapExtractor.BitmapToImageSource(image);
+
             if (card.LicenseID.id == 0) CopyrightBlock.Text = string.Empty;
             else CopyrightBlock.Text = card.LicenseID.str;
         }

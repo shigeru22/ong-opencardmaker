@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenCardMaker.Dialogs.GodMode"
         mc:Ignorable="d"
-        Title="Card Info" Height="264" Width="270" WindowStartupLocation="CenterScreen">
+        Title="Card Info" Height="264" Width="380" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="160"/>
@@ -14,8 +14,12 @@
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="118" />
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Image Name="CardImage" Width="110" Height="150" RenderOptions.BitmapScalingMode="Fant" />
+            </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="45"/>
