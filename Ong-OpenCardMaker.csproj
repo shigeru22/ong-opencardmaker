@@ -6,7 +6,13 @@
     <RootNamespace>OpenCardMaker</RootNamespace>
     <UseWPF>true</UseWPF>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Application.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Dialogs\Application.png" />
+    <None Remove="Icon\Application.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AssetsTools.NET" Version="2.0.9" />
@@ -15,6 +21,10 @@
 
   <ItemGroup>
     <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icon\Application.ico" />
   </ItemGroup>
 
   <ItemGroup>

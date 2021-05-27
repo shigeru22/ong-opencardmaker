@@ -193,6 +193,12 @@ namespace OpenCardMaker.Windows
             Clipboard.SetText(output);
         }
 
+        public void AboutClick(object sender, RoutedEventArgs e)
+        {
+            var window = new AboutWindow();
+            window.Show();
+        }
+
         public void ExitApplicationClick(object sender, RoutedEventArgs e)
         {
             Close();
