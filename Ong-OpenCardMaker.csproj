@@ -10,8 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Application.ico" />
     <None Remove="Dialogs\Application.png" />
-    <None Remove="Icon\Application.ico" />
+    <None Remove="Icon\Application.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,7 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Icon\Application.ico" />
+    <Resource Include="Application.ico" />
+    <Resource Include="Icon\Application.png" />
   </ItemGroup>
 
   <ItemGroup>

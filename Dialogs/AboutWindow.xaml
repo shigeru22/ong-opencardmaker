@@ -22,7 +22,7 @@
                         <ColumnDefinition Width="32" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <Image Source="pack://application:,,,/Icon/Application.ico" Grid.Column="0" Width="32" Height="32" RenderOptions.BitmapScalingMode="Fant" />
+                    <Image Source="pack://application:,,,/Icon/Application.png" Grid.Column="0" Width="32" Height="32" RenderOptions.BitmapScalingMode="Fant" />
                     <TextBlock Grid.Column="1" Text="OpenCardMaker&#x0a;(c) shigeru22, licensed under GPL-v2.0." Margin="8,0,0,0" />
                 </Grid>
                 <Grid Grid.Row="1">
