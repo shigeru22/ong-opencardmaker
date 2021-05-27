@@ -13,6 +13,5 @@ namespace OpenCardMaker
     /// </summary>
     public partial class App : Application
     {
-
     }
 }

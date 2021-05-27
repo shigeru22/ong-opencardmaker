@@ -50,14 +50,46 @@ namespace OpenCardMaker.Dialogs
 
         bool InputProcessor(Key key)
         {
-            if ((progress == 0 || progress == 1) && key == Key.Up) return true;
-            else if ((progress == 2 || progress == 3) && key == Key.Down) return true;
-            else if ((progress == 4 || progress == 6) && key == Key.Left) return true;
-            else if ((progress == 5 || progress == 7) && key == Key.Right) return true;
-            else if (progress == 8 && key == Key.B) return true;
-            else if (progress == 9 && key == Key.A) return true;
-            else if (progress == 10 && key == Key.Enter) return true;
-            else return false;
+            bool ret = false;
+
+            switch(progress)
+            {
+                case 0:
+                    if (key.Equals(Key.Up)) ret = true;
+                    break;
+                case 1:
+                    if (key.Equals(Key.Up)) ret = true;
+                    break;
+                case 2:
+                    if (key.Equals(Key.Down)) ret = true;
+                    break;
+                case 3:
+                    if (key.Equals(Key.Down)) ret = true;
+                    break;
+                case 4:
+                    if (key.Equals(Key.Left)) ret = true;
+                    break;
+                case 5:
+                    if (key.Equals(Key.Right)) ret = true;
+                    break;
+                case 6:
+                    if (key.Equals(Key.Left)) ret = true;
+                    break;
+                case 7:
+                    if (key.Equals(Key.Right)) ret = true;
+                    break;
+                case 8:
+                    if (key.Equals(Key.B)) ret = true;
+                    break;
+                case 9:
+                    if (key.Equals(Key.A)) ret = true;
+                    break;
+                case 10:
+                    if (key.Equals(Key.Enter)) ret = true;
+                    break;
+            }
+
+            return ret;
         }
     }
 }

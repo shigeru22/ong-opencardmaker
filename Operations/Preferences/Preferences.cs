@@ -1,15 +1,9 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Newtonsoft.Json;
 
-namespace OpenCardMaker.Operations
+namespace OpenCardMaker.Operations.Preferences
 {
-    class PathSettings
-    {
-        public string ongeki;
-        public string config;
-        public OngekiType type;
-    }
-
     class Preferences
     {
         public static bool SavePreferences(PathSettings contents)
