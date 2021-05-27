@@ -11,7 +11,7 @@ namespace OpenCardMaker
             using (FolderBrowserDialog dialog = new FolderBrowserDialog())
             {
                 dialog.ShowNewFolderButton = false;
-                if(dialog.ShowDialog() == DialogResult.OK)
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     location = dialog.SelectedPath;
                 }

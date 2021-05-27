@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using OpenCardMaker.Operations.About;
+﻿using OpenCardMaker.Operations.About;
 using OpenCardMaker.Operations.Exceptions;
+using System.Diagnostics;
+using System.Text;
+using System.Windows;
 
 namespace OpenCardMaker.Dialogs
 {
@@ -36,7 +25,7 @@ namespace OpenCardMaker.Dialogs
             int len = Dependencies.list.Length;
             if (len != Dependencies.license.Length) throw new InvalidDataException("List and license aren't the same length.");
 
-            for(int i = 0; i < len; i++)
+            for (int i = 0; i < len; i++)
             {
                 builder.AppendLine(Dependencies.list[i]);
                 builder.AppendLine(Dependencies.license[i]);

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace OpenCardMaker.Operations
+﻿namespace OpenCardMaker.Operations
 {
     class PathSettings
     {

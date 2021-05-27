@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using OpenCardMaker.Operations;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using OpenCardMaker.Operations;
 
 namespace OpenCardMaker.Dialogs
 {
@@ -35,7 +26,7 @@ namespace OpenCardMaker.Dialogs
 
         public void btnOKClick(object sender, RoutedEventArgs e)
         {
-            if(CardIDEntry.Text.Equals(string.Empty))
+            if (CardIDEntry.Text.Equals(string.Empty))
             {
                 MessageBox.Show("Card ID must not be empty.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -56,7 +47,7 @@ namespace OpenCardMaker.Dialogs
             var confirm = new AddCardConfirm(temp, _asset.GetImage(cardId.ToString("D6")));
             bool? result = confirm.ShowDialog();
 
-            switch(result)
+            switch (result)
             {
                 case true:
                     target = cardId;
@@ -66,7 +57,7 @@ namespace OpenCardMaker.Dialogs
                 case false:
                     DialogResult = false;
                     break;
-                // need default switch?
+                    // need default switch?
             }
 
             Close();

@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
 
 namespace OpenCardMaker.Operations
 {
@@ -42,7 +41,7 @@ namespace OpenCardMaker.Operations
             // if not changed, don't save it
             UserCard temp = GetUserCard();
             if (temp.length == data.length && Enumerable.SequenceEqual(temp.userCardList, data.userCardList)) return 0;
-            
+
             using (StreamWriter writer = new StreamWriter(File.Open($"{path}\\UserCard.json", FileMode.Create)))
             {
                 writer.Write(JsonConvert.SerializeObject(data, Formatting.Indented));

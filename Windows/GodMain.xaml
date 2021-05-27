@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenCardMaker.Windows"
         mc:Ignorable="d"
-        Title="OpenCardMaker (God Mode)" Height="420" Width="670" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" WindowState="Normal" ResizeMode="CanMinimize">
+        Title="OpenCardMaker" Height="420" Width="670" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" WindowState="Normal" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>

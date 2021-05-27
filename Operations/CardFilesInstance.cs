@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace OpenCardMaker.Operations
@@ -79,8 +78,8 @@ namespace OpenCardMaker.Operations
         {
             List<CardData> cards = new List<CardData>();
             string[] cardDirs = Directory.GetDirectories($"{path}");
-            
-            foreach(string cardDir in cardDirs) cards.Add(QueryCardData($"{cardDir}\\Card.xml", false));
+
+            foreach (string cardDir in cardDirs) cards.Add(QueryCardData($"{cardDir}\\Card.xml", false));
 
             return cards.ToArray();
         }

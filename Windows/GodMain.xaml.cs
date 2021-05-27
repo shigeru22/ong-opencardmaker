@@ -1,19 +1,11 @@
-﻿using System;
+﻿using OpenCardMaker.Dialogs;
+using OpenCardMaker.Operations;
+using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Diagnostics;
-using OpenCardMaker.Operations;
-using System.Linq;
-using OpenCardMaker.Dialogs;
 
 namespace OpenCardMaker.Windows
 {
@@ -67,9 +59,9 @@ namespace OpenCardMaker.Windows
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             foreach (CardRow temp in from UserCardData data in card.userCardList
-                                 let card = cardInst.QueryCardData(data.cardId)
-                                 let temp = new CardRow(data.cardId, card.CharaID.str, card.Name.str, data.level, card.SkillID.str)
-                                 select temp)
+                                     let card = cardInst.QueryCardData(data.cardId)
+                                     let temp = new CardRow(data.cardId, card.CharaID.str, card.Name.str, data.level, card.SkillID.str)
+                                     select temp)
             {
                 cardList.Add(temp);
                 total++;
@@ -122,7 +114,7 @@ namespace OpenCardMaker.Windows
         private void GodMain_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var close = MessageBox.Show("Exit the application?", "Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            switch(close)
+            switch (close)
             {
                 case MessageBoxResult.No:
                     e.Cancel = true;
@@ -136,7 +128,7 @@ namespace OpenCardMaker.Windows
         public void btnLogout(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Save to configuration and logout?", "Logout", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            switch(result)
+            switch (result)
             {
                 case MessageBoxResult.Yes: break;
                 default: return;
@@ -162,13 +154,13 @@ namespace OpenCardMaker.Windows
 
         public void SaveCardsListClick(object sender, RoutedEventArgs e)
         {
-            if(userOp.SaveUserCard(card) != 0) MessageBox.Show("Card data saved.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (userOp.SaveUserCard(card) != 0) MessageBox.Show("Card data saved.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         public void RevertToSavedClick(object sender, RoutedEventArgs e)
         {
             var confirm = MessageBox.Show("Discard all changes and revert to last saved data?", "Revert to Saved", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            switch(confirm)
+            switch (confirm)
             {
                 case MessageBoxResult.Yes:
                     card = userOp.GetUserCard();
@@ -184,11 +176,11 @@ namespace OpenCardMaker.Windows
 
             // MessageBox.Show(((MenuItem)sender).Name);
             string menu = ((MenuItem)sender).Name;
-            if(menu.Contains("CopyID")) output = selected.CardId;
-            else if(menu.Contains("CopyName")) output = selected.CardName;
-            else if(menu.Contains("CopyTitle")) output = selected.CardTitle;
-            else if(menu.Contains("CopyLevel")) output = selected.CardLevel;
-            else if(menu.Contains("CopySkill")) output = selected.CardSkill;
+            if (menu.Contains("CopyID")) output = selected.CardId;
+            else if (menu.Contains("CopyName")) output = selected.CardName;
+            else if (menu.Contains("CopyTitle")) output = selected.CardTitle;
+            else if (menu.Contains("CopyLevel")) output = selected.CardLevel;
+            else if (menu.Contains("CopySkill")) output = selected.CardSkill;
 
             Clipboard.SetText(output);
         }
@@ -209,7 +201,7 @@ namespace OpenCardMaker.Windows
             var dialog = new AddCard(ref cardInst, ref assetsInst);
             bool? result = dialog.ShowDialog();
 
-            switch(result)
+            switch (result)
             {
                 case true:
                     // MessageBox.Show(dialog.target.ToString());
@@ -235,7 +227,7 @@ namespace OpenCardMaker.Windows
                     break;
                 case MessageBoxResult.No:
                     break;
-                // put log on default
+                    // put log on default
             }
         }
 
@@ -263,13 +255,13 @@ namespace OpenCardMaker.Windows
                 }
             }
 
-            if(cardId == 0)
+            if (cardId == 0)
             {
                 MessageBox.Show("Specified card ID could not be found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if(level == maxLevel)
+            if (level == maxLevel)
             {
                 MessageBox.Show("Maximum level reached for the selected card.\nIncrease the cap by using the Up Cap button.", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
@@ -278,13 +270,13 @@ namespace OpenCardMaker.Windows
             IncreaseCardLevel dialog = new IncreaseCardLevel(level, maxLevel);
             dialog.ShowDialog();
 
-            switch(dialog.DialogResult)
+            switch (dialog.DialogResult)
             {
                 case true:
                     int length = card.userCardList.Length;
-                    for(int i = 0; i < length; i++)
+                    for (int i = 0; i < length; i++)
                     {
-                        if(card.userCardList[i].cardId == cardId)
+                        if (card.userCardList[i].cardId == cardId)
                         {
                             card.userCardList[i].level += dialog.levelNumber;
                             break;
@@ -302,14 +294,14 @@ namespace OpenCardMaker.Windows
             CardRow selected = (CardRow)UserCardListData.SelectedItem;
 
             int cardId = 0, cap = 0, maxCap = 0;
-            foreach(UserCardData temp in card.userCardList)
+            foreach (UserCardData temp in card.userCardList)
             {
-                if(temp.cardId.ToString() == selected.CardId)
+                if (temp.cardId.ToString() == selected.CardId)
                 {
                     cardId = temp.cardId;
                     cap = temp.maxLevel;
 
-                    switch(cardInst.QueryCardData(cardId).Rarity)
+                    switch (cardInst.QueryCardData(cardId).Rarity)
                     {
                         case "N": maxCap = 100; break;
                         case "R": maxCap = 70; break;
@@ -328,7 +320,7 @@ namespace OpenCardMaker.Windows
                 return;
             }
 
-            if(cap == maxCap)
+            if (cap == maxCap)
             {
                 MessageBox.Show("The selected card is already in its maximum level cap.", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
@@ -337,7 +329,7 @@ namespace OpenCardMaker.Windows
             IncreaseCardCap dialog = new IncreaseCardCap(cap, maxCap);
             dialog.ShowDialog();
 
-            switch(dialog.DialogResult)
+            switch (dialog.DialogResult)
             {
                 case true:
                     int length = card.userCardList.Length;
