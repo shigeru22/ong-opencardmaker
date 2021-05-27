@@ -28,8 +28,7 @@ namespace OpenCardMaker.Operations.Preferences
                 PathSettings temp = new PathSettings
                 {
                     ongeki = "",
-                    config = "",
-                    type = OngekiType.Plus
+                    config = ""
                 };
 
                 using (StreamWriter writer = new StreamWriter(File.Open($"{path}\\config\\path.json", FileMode.Create)))

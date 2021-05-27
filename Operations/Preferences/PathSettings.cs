@@ -6,6 +6,5 @@ namespace OpenCardMaker.Operations
     {
         public string ongeki;
         public string config;
-        public OngekiType type;
     }
 }

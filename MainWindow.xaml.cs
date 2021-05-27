@@ -19,47 +19,29 @@ using OpenCardMaker.Operations.Preferences;
 
 namespace OpenCardMaker
 {
-    public enum OngekiType
-    {
-        Plus = 2,
-        Summer = 3
-    }
-
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        bool godMode; // will be put in config file later
-        OngekiType type;
+        // OngekiType type; // TODO: Check for certain cards unavailable in its executable packages
         PathSettings settings;
 
         public MainWindow()
         {
             settings = Preferences.LoadPreferences();
-            type = settings.type;
 
             InitializeComponent();
-            godMode = true;
             OngekiLocationText.Text = settings.ongeki;
             ConfigLocationText.Text = settings.config;
-            // type?
         }
 
         void OpenWindow(object sender, EventArgs e)
         {
             Preferences.SavePreferences(settings);
 
-            if (godMode == true)
-            {
-                var window = new GodMain(settings.ongeki, settings.config);
-                window.Show();
-            }
-            else
-            {
-                // var window = new Window();
-                // window.Show();
-            }
+            var window = new GodMain(settings.ongeki, settings.config);
+            window.Show();
         }
 
         void btnOKClick(object sender, RoutedEventArgs e)
@@ -103,38 +85,6 @@ namespace OpenCardMaker
                 dialog.ShowDialog();
 
                 ConfigLocation.Foreground = Brushes.Red;
-            }
-        }
-
-        void btnGodModeClick(object sender, RoutedEventArgs e)
-        {
-            if (godMode)
-            {
-                GodModeToggle();
-                return;
-            }
-
-            var target = new Dialogs.GodModeConfirmation();
-            
-            bool? status = target.ShowDialog();
-            switch(status)
-            {
-                case true: GodModeToggle(); break;
-                default: break;
-            }
-        }
-
-        public void GodModeToggle()
-        {
-            if (godMode)
-            {
-                godMode = false;
-                GodModeBtn.Content = "Enable God Mode";
-            }
-            else
-            {
-                godMode = true;
-                GodModeBtn.Content = "Disable God Mode";
             }
         }
     }
