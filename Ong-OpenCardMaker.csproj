@@ -18,13 +18,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Dialogs\GodMode\AddCardConfirm.xaml.cs">
+    <Compile Update="Dialogs\AddCardConfirm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Dialogs\GodMode\AddCardConfirm.xaml">
+    <Page Update="Dialogs\AddCardConfirm.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

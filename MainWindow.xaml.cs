@@ -1,7 +1,4 @@
-﻿using OpenCardMaker.Operations;
-using OpenCardMaker.Windows;
-using OpenCardMaker.Windows.GodMode;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OpenCardMaker.Operations;
+using OpenCardMaker.Windows;
 using OpenCardMaker.Operations.Preferences;
 
 namespace OpenCardMaker
@@ -62,9 +61,7 @@ namespace OpenCardMaker
             }
             else
             {
-                var dialog = new Dialogs.CustomDialog("Error", "No mu3.exe and mu3_Data folder found.");
-                dialog.ShowDialog();
-
+                MessageBox.Show("No mu3.exe and mu_Data folder found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 OngekiLocation.Foreground = Brushes.Red;
             }
         }
@@ -81,9 +78,7 @@ namespace OpenCardMaker
             }
             else
             {
-                var dialog = new Dialogs.CustomDialog("Error", "No related config files found.");
-                dialog.ShowDialog();
-
+                MessageBox.Show("No related config files found.\nRun the game once after patching the game with UnityParrot.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 ConfigLocation.Foreground = Brushes.Red;
             }
         }

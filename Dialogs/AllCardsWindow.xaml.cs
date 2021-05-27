@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace OpenCardMaker.Dialogs.GodMode
+namespace OpenCardMaker.Dialogs
 {
     /// <summary>
     /// Interaction logic for AllCardsWindow.xaml

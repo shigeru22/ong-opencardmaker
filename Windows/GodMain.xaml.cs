@@ -14,9 +14,8 @@ using System.Diagnostics;
 using OpenCardMaker.Operations;
 using System.Linq;
 using OpenCardMaker.Dialogs;
-using OpenCardMaker.Dialogs.GodMode;
 
-namespace OpenCardMaker.Windows.GodMode
+namespace OpenCardMaker.Windows
 {
     /// <summary>
     /// Interaction logic for GodMain.xaml
@@ -224,17 +223,7 @@ namespace OpenCardMaker.Windows.GodMode
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    int target;
-                    try
-                    {
-                        target = int.Parse(selected.CardId);
-                    }
-                    catch(Exception ex)
-                    {
-                        CustomDialog dialog = new CustomDialog("Error", ex.Message);
-                        dialog.ShowDialog();
-                        break;
-                    }
+                    int target = int.Parse(selected.CardId);
                     card.RemoveCard(target);
                     RefreshCardList();
                     break;
@@ -321,8 +310,7 @@ namespace OpenCardMaker.Windows.GodMode
                         case "SR": maxCap = 70; break;
                         case "SSR": maxCap = 70; break;
                         default:
-                            CustomDialog error = new CustomDialog("Error", "Unrecognized rarity attribute.");
-                            error.ShowDialog();
+                            MessageBox.Show("Error", "Unrecognized rarity attribute.", MessageBoxButton.OK, MessageBoxImage.Error);
                             return;
                     }
                 }

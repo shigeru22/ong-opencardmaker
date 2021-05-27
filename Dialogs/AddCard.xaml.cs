@@ -1,6 +1,4 @@
-﻿using OpenCardMaker.Operations;
-using OpenCardMaker.Windows.GodMode;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -11,8 +9,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using OpenCardMaker.Operations;
 
-namespace OpenCardMaker.Dialogs.GodMode
+namespace OpenCardMaker.Dialogs
 {
     /// <summary>
     /// Interaction logic for AddCard.xaml
@@ -36,11 +35,9 @@ namespace OpenCardMaker.Dialogs.GodMode
 
         public void btnOKClick(object sender, RoutedEventArgs e)
         {
-            CustomDialog dialog;
             if(CardIDEntry.Text.Equals(string.Empty))
             {
-                dialog = new CustomDialog("Error", "Card ID must not be empty.");
-                dialog.ShowDialog();
+                MessageBox.Show("Card ID must not be empty.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -51,8 +48,7 @@ namespace OpenCardMaker.Dialogs.GodMode
             }
             catch (Exception ex)
             {
-                dialog = new CustomDialog("Error", $"Parse error: {ex.Message}");
-                dialog.ShowDialog();
+                MessageBox.Show($"Parse error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 

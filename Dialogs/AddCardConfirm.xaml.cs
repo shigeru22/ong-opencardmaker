@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 using System.Drawing;
 using OpenCardMaker.Operations.AssetsTools;
 
-namespace OpenCardMaker.Dialogs.GodMode
+namespace OpenCardMaker.Dialogs
 {
     /// <summary>
     /// Interaction logic for AddCardInfo.xaml

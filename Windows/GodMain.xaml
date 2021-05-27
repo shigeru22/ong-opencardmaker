@@ -1,9 +1,9 @@
-﻿<Window x:Class="OpenCardMaker.Windows.GodMode.GodMain"
+﻿<Window x:Class="OpenCardMaker.Windows.GodMain"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OpenCardMaker.Windows.GodMode"
+        xmlns:local="clr-namespace:OpenCardMaker.Windows"
         mc:Ignorable="d"
         Title="OpenCardMaker (God Mode)" Height="420" Width="670" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" WindowState="Normal" ResizeMode="CanMinimize">
     <Grid>
