@@ -71,13 +71,8 @@
                 </Grid>
             </TabItem>
             <TabItem Header="User Settings">
-                <Grid>
-                    <!--
-                    <TextBlock Text="WIP" TextWrapping="Wrap" Margin="281,148,282,148" HorizontalAlignment="Center"/>
-                    -->
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20*" />
-                    </Grid.ColumnDefinitions>
+                <Grid Width="654">
+                    <TextBlock Text="What to be put here?" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </TabItem>
         </TabControl>
