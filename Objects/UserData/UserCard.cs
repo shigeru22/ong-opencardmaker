@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenCardMaker
 {
@@ -76,6 +77,11 @@ namespace OpenCardMaker
             }
 
             return index;
+        }
+
+        public bool EqualCheck(UserCardData[] data)
+        {
+            return Enumerable.SequenceEqual(userCardList, data);
         }
     }
 }

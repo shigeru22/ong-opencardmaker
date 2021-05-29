@@ -86,9 +86,9 @@ namespace OpenCardMaker.Windows
                 user = UserOperations.Instance.GetUserData();
                 card = UserOperations.Instance.GetUserCard();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // show dialog later
+                MessageBox.Show($"Unhandled exception occured:\n{e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 var window = new MainWindow();
                 window.Show();
 
@@ -99,41 +99,55 @@ namespace OpenCardMaker.Windows
 
             UserName.Text = $"{user.userId}: {user.userData.userName}";
             RefreshCardList();
+            SetClosingEvent();
+        }
 
+        private void SetClosingEvent()
+        {
+            Closing -= GodMain_Logout;
             Closing += GodMain_Closing;
+        }
+
+        private void SetLogoutEvent()
+        {
+            Closing += GodMain_Logout;
+            Closing -= GodMain_Closing;
         }
 
         private void GodMain_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var close = MessageBox.Show("Exit the application?", "Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            switch (close)
+            if (!UserOperations.Instance.GetUserCard().EqualCheck(card.userCardList))
             {
-                case MessageBoxResult.No:
-                    e.Cancel = true;
-                    break;
-                default:
-                    // userOp.SaveUserCard(card);
-                    break;
+                var close = MessageBox.Show("Save any changes before closing?", "Exit", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                switch (close)
+                {
+                    case MessageBoxResult.Yes:
+                        UserOperations.Instance.SaveUserCard(card);
+                        break;
+                    case MessageBoxResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                }
             }
         }
 
-        public void btnLogout(object sender, RoutedEventArgs e)
+        private void GodMain_Logout(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var result = MessageBox.Show("Save to configuration and logout?", "Logout", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            switch (result)
+            if (!UserOperations.Instance.GetUserCard().EqualCheck(card.userCardList))
             {
-                case MessageBoxResult.Yes: break;
-                default: return;
+                var close = MessageBox.Show("Save any changes before returning?", "Logout", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                switch (close)
+                {
+                    case MessageBoxResult.Yes:
+                        UserOperations.Instance.SaveUserCard(card);
+                        break;
+                    case MessageBoxResult.Cancel:
+                        e.Cancel = true;
+                        SetClosingEvent();
+                        return;
+                }
             }
 
-            // userOp.SaveUserCard(card);
-            Closing += BackToMain;
-            Closing -= GodMain_Closing; // probably find elegant way?
-            Close();
-        }
-
-        public void BackToMain(object sender, EventArgs e)
-        {
             var window = new MainWindow();
             window.Show();
         }
@@ -181,6 +195,12 @@ namespace OpenCardMaker.Windows
         {
             var window = new AboutWindow();
             window.Show();
+        }
+
+        public void btnLogout(object sender, RoutedEventArgs e)
+        {
+            SetLogoutEvent();
+            Close();
         }
 
         public void ExitApplicationClick(object sender, RoutedEventArgs e)
