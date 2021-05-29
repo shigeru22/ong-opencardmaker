@@ -16,11 +16,9 @@ namespace OpenCardMaker.Operations.AssetsTools
     {
         public static Bitmap GetBitmap(string assetsPath, string cardId)
         {
-            // TODO: Convert to singleton
-            AssetsManager manager = new AssetsManager();
-            var inst = manager.LoadAssetsFileFromBundle(manager.LoadBundleFile($"{assetsPath}\\ui_card_{cardId}"), 0);
+            var inst = Manager.Instance.manager.LoadAssetsFileFromBundle(Manager.Instance.manager.LoadBundleFile($"{assetsPath}\\ui_card_{cardId}"), 0);
             var table = inst.table;
-            var atvf = manager.GetTypeInstance(inst.file, table.GetAssetInfo(Path.GetFileName($"UI_Card_{cardId}"))).GetBaseField();
+            var atvf = Manager.Instance.manager.GetTypeInstance(inst.file, table.GetAssetInfo(Path.GetFileName($"UI_Card_{cardId}"))).GetBaseField();
             var texFile = TextureFile.ReadTextureFile(atvf);
             var texData = texFile.GetTextureData(inst);
 
