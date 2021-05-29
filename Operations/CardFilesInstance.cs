@@ -7,21 +7,49 @@ namespace OpenCardMaker.Operations
 {
     public class CardFilesInstance
     {
-        readonly string path;
+        private static CardFilesInstance instance;
+        private static readonly object mutex = new object();
 
         /// <summary>
-        /// Creates a card file data instance. Must be instantiated.
+        /// Returns active card files instance.
+        /// Set path before calling instance methods.
         /// </summary>
-        /// <param name="path"></param>
-        public CardFilesInstance(string path)
+        public static CardFilesInstance Instance
         {
-            if (File.Exists($"{path}\\mu3.exe")) this.path = $"{path}\\mu3_Data\\StreamingAssets\\GameData\\A000\\card";
-            else if (File.Exists($"{path}\\package\\mu3.exe")) this.path = $"{path}\\package\\mu3_Data\\StreamingAssets\\GameData\\A000\\card";
-            else throw new InvalidPathException();
+            get
+            {
+                lock(mutex)
+                {
+                    if (instance == null) instance = new CardFilesInstance();
+                    return instance;
+                }
+            }
+        }
+
+        private bool isPathSpecified;
+        private string _path;
+
+        public string path
+        {
+            set
+            {
+                if (File.Exists($"{value}\\mu3.exe")) _path = $"{value}\\mu3_Data\\StreamingAssets\\GameData\\A000\\card";
+                else if (File.Exists($"{value}\\package\\mu3.exe")) _path = $"{value}\\package\\mu3_Data\\StreamingAssets\\GameData\\A000\\card";
+                else throw new InvalidPathException();
+
+                isPathSpecified = true;
+            }
+        }
+
+        public CardFilesInstance()
+        {
+            isPathSpecified = false;
         }
 
         public CardData QueryCardData(string path, bool relativeFromCardDir = true)
         {
+            if (!isPathSpecified) throw new UnsetPathException();
+
             if (File.Exists(path) && Path.GetExtension(path).ToLower() == ".xml")
             {
                 CardData target = new CardData();
@@ -38,12 +66,14 @@ namespace OpenCardMaker.Operations
 
         public CardData QueryCardData(int cardId)
         {
+            if (!isPathSpecified) throw new UnsetPathException();
+
             string temp = cardId.ToString("D6");
-            if (Directory.Exists($"{path}\\card{temp}"))
+            if (Directory.Exists($"{_path}\\card{temp}"))
             {
                 CardData target = new CardData();
 
-                using (Stream xml = new FileStream($"{path}\\card{temp}\\Card.xml", FileMode.Open))
+                using (Stream xml = new FileStream($"{_path}\\card{temp}\\Card.xml", FileMode.Open))
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(CardData));
                     target = (CardData)serializer.Deserialize(xml);
@@ -56,6 +86,8 @@ namespace OpenCardMaker.Operations
 
         public CardData QueryCardData(string cardId)
         {
+            if (!isPathSpecified) throw new UnsetPathException();
+
             CardData target;
             string temp;
 
@@ -76,8 +108,10 @@ namespace OpenCardMaker.Operations
 
         public CardData[] QueryAllCardData()
         {
+            if (!isPathSpecified) throw new UnsetPathException();
+
             List<CardData> cards = new List<CardData>();
-            string[] cardDirs = Directory.GetDirectories($"{path}");
+            string[] cardDirs = Directory.GetDirectories($"{_path}");
 
             foreach (string cardDir in cardDirs) cards.Add(QueryCardData($"{cardDir}\\Card.xml", false));
 

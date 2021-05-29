@@ -12,14 +12,8 @@ namespace OpenCardMaker.Dialogs
         public int target { get; private set; }
         public int skillId { get; private set; }
 
-        CardFilesInstance _inst;
-        CardAssetInstance _asset;
-
-        public AddCard(ref CardFilesInstance cardFilesInstance, ref CardAssetInstance cardAssetInstance)
+        public AddCard()
         {
-            _inst = cardFilesInstance;
-            _asset = cardAssetInstance;
-
             InitializeComponent();
             CardIDEntry.Text = string.Empty;
         }
@@ -43,8 +37,8 @@ namespace OpenCardMaker.Dialogs
                 return;
             }
 
-            CardData temp = _inst.QueryCardData(cardId.ToString("D6")); // handle exception later
-            var confirm = new AddCardConfirm(temp, _asset.GetImage(cardId.ToString("D6")));
+            CardData temp = CardFilesInstance.Instance.QueryCardData(cardId.ToString("D6")); // handle exception later
+            var confirm = new AddCardConfirm(temp, CardAssetInstance.Instance.GetImage(cardId.ToString("D6")));
             bool? result = confirm.ShowDialog();
 
             switch (result)

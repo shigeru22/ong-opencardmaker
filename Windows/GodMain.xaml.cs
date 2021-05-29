@@ -41,11 +41,6 @@ namespace OpenCardMaker.Windows
             }
         }
 
-        readonly string ongekiPath;
-        readonly string configPath;
-        CardFilesInstance cardInst;
-        CardAssetInstance assetsInst;
-        UserOperations userOp;
         UserData user;
         UserCard card;
 
@@ -59,7 +54,7 @@ namespace OpenCardMaker.Windows
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             foreach (CardRow temp in from UserCardData data in card.userCardList
-                                     let card = cardInst.QueryCardData(data.cardId)
+                                     let card = CardFilesInstance.Instance.QueryCardData(data.cardId)
                                      let temp = new CardRow(data.cardId, card.CharaID.str, card.Name.str, data.level, card.SkillID.str)
                                      select temp)
             {
@@ -82,17 +77,14 @@ namespace OpenCardMaker.Windows
 
         public GodMain(string ongekiPath, string configPath)
         {
-            this.ongekiPath = ongekiPath;
-            this.configPath = configPath;
-
-            cardInst = new CardFilesInstance(this.ongekiPath);
-            assetsInst = new CardAssetInstance(this.ongekiPath);
-            userOp = new UserOperations(this.configPath);
+            CardFilesInstance.Instance.path = ongekiPath;
+            CardAssetInstance.Instance.path = ongekiPath;
+            UserOperations.Instance.path = configPath;
 
             try
             {
-                user = userOp.GetUserData();
-                card = userOp.GetUserCard();
+                user = UserOperations.Instance.GetUserData();
+                card = UserOperations.Instance.GetUserCard();
             }
             catch (Exception)
             {
@@ -148,13 +140,13 @@ namespace OpenCardMaker.Windows
 
         public void ViewAllCardsClick(object sender, RoutedEventArgs e)
         {
-            var window = new AllCardsWindow(cardInst);
+            var window = new AllCardsWindow();
             window.Show();
         }
 
         public void SaveCardsListClick(object sender, RoutedEventArgs e)
         {
-            if (userOp.SaveUserCard(card) != 0) MessageBox.Show("Card data saved.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (UserOperations.Instance.SaveUserCard(card) != 0) MessageBox.Show("Card data saved.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         public void RevertToSavedClick(object sender, RoutedEventArgs e)
@@ -163,7 +155,7 @@ namespace OpenCardMaker.Windows
             switch (confirm)
             {
                 case MessageBoxResult.Yes:
-                    card = userOp.GetUserCard();
+                    card = UserOperations.Instance.GetUserCard();
                     RefreshCardList();
                     break;
             }
@@ -198,7 +190,7 @@ namespace OpenCardMaker.Windows
 
         public void btnAddClick(object sender, RoutedEventArgs e)
         {
-            var dialog = new AddCard(ref cardInst, ref assetsInst);
+            var dialog = new AddCard();
             bool? result = dialog.ShowDialog();
 
             switch (result)
@@ -235,7 +227,7 @@ namespace OpenCardMaker.Windows
         {
             CardRow selected = (CardRow)UserCardListData.SelectedItem;
 
-            CardDetails dialog = new CardDetails(selected.CardId, cardInst.QueryCardData(selected.CardId), assetsInst.GetImage(selected.CardId));
+            CardDetails dialog = new CardDetails(selected.CardId, CardFilesInstance.Instance.QueryCardData(selected.CardId), CardAssetInstance.Instance.GetImage(selected.CardId));
             dialog.ShowDialog();
         }
 
@@ -301,7 +293,9 @@ namespace OpenCardMaker.Windows
                     cardId = temp.cardId;
                     cap = temp.maxLevel;
 
-                    switch (cardInst.QueryCardData(cardId).Rarity)
+                    string rarity = CardFilesInstance.Instance.QueryCardData(cardId).Rarity;
+
+                    switch (rarity)
                     {
                         case "N": maxCap = 100; break;
                         case "R": maxCap = 70; break;

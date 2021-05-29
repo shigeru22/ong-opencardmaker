@@ -35,17 +35,14 @@ namespace OpenCardMaker.Dialogs
             }
         }
 
-        CardFilesInstance cardInst;
         List<CardRow> cardList = new List<CardRow>();
 
-        public AllCardsWindow(CardFilesInstance instance)
+        public AllCardsWindow()
         {
-            cardInst = instance;
-
             cardList.Clear();
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            CardData[] cards = cardInst.QueryAllCardData();
+            CardData[] cards = CardFilesInstance.Instance.QueryAllCardData();
             stopwatch.Stop();
             cardList.AddRange(from CardData card in cards
                               let temp = new CardRow(card.dataName.Substring(4), card.CharaID.str, card.Name.str, card.SkillID.str)

@@ -7,20 +7,43 @@ namespace OpenCardMaker.Operations
 {
     public class CardAssetInstance
     {
-        AssetsManager manager;
-        readonly string path;
+        private static CardAssetInstance instance;
+        private static readonly object mutex = new object();
 
         /// <summary>
-        /// Creates a card assets instance. Must be instantiated.
+        /// Returns active card asset instance.
+        /// Set path before calling instance methods.
         /// </summary>
-        /// <param name="path">Path to main application.</param>
-        public CardAssetInstance(string path)
+        public static CardAssetInstance Instance
         {
-            if (File.Exists($"{path}\\mu3.exe")) this.path = $"{path}\\mu3_Data\\StreamingAssets\\assets";
-            else if (File.Exists($"{path}\\package\\mu3.exe")) this.path = $"{path}\\package\\mu3_Data\\StreamingAssets\\assets";
-            else throw new InvalidPathException();
+            get
+            {
+                lock (mutex)
+                {
+                    if (instance == null) instance = new CardAssetInstance();
+                    return instance;
+                }
+            }
+        }
 
-            manager = new AssetsManager();
+        private bool isPathSpecified;
+        private string _path;
+
+        public string path
+        {
+            set
+            {
+                if (File.Exists($"{value}\\mu3.exe")) _path = $"{value}\\mu3_Data\\StreamingAssets\\assets";
+                else if (File.Exists($"{value}\\package\\mu3.exe")) _path = $"{value}\\package\\mu3_Data\\StreamingAssets\\assets";
+                else throw new InvalidPathException();
+
+                isPathSpecified = true;
+            }
+        }
+
+        public CardAssetInstance()
+        {
+            isPathSpecified = false;
         }
 
         /// <summary>
@@ -30,7 +53,8 @@ namespace OpenCardMaker.Operations
         /// <returns></returns>
         public Bitmap GetImage(string cardId)
         {
-            return BitmapExtractor.GetBitmap(path, cardId);
+            if (!isPathSpecified) throw new UnsetPathException();
+            return BitmapExtractor.GetBitmap(_path, cardId);
         }
     }
 }
