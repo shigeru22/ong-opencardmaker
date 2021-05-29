@@ -7,6 +7,11 @@
     <UseWPF>true</UseWPF>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Application.ico</ApplicationIcon>
+    <Authors>shigeru22</Authors>
+    <Company />
+    <Copyright>shigeru22</Copyright>
+    <PackageLicenseExpression>Licensed under GPL-v2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/shigeru22/ong-opencardmaker</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
