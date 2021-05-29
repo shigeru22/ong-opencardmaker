@@ -22,7 +22,7 @@
                     <MenuItem Header="_Exit" Click="ExitApplicationClick" />
                 </MenuItem>
                 <MenuItem Header="_Edit">
-                    <MenuItem Name="CopyMenuItem" Header="_Copy">
+                    <MenuItem Name="CopyMenuItem" Header="_Copy" IsEnabled="False">
                         <MenuItem Name="CopyID" Header="Card ID" Click="CopyDataClick" />
                         <MenuItem Name="CopyName" Header="Chara Name" Click="CopyDataClick" />
                         <MenuItem Name="CopyTitle" Header="Card Title" Click="CopyDataClick" />
@@ -42,7 +42,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="70"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Name="UserCardListData" IsReadOnly="True" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="False" Height="312.04" Width="584" HorizontalAlignment="Left">
+                    <DataGrid Name="UserCardListData" IsReadOnly="True" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="False" Height="312.04" Width="584" HorizontalAlignment="Left" SelectedCellsChanged="UserCardListData_SelectedCellsChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding CardId}" Width="60" />
                             <DataGridTextColumn Header="Name" Binding="{Binding CardName}" Width="100" />

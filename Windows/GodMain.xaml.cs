@@ -114,6 +114,11 @@ namespace OpenCardMaker.Windows
             Closing -= GodMain_Closing;
         }
 
+        private void UserCardListData_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            if(e.AddedCells[0].Item != null) CopyMenuItem.IsEnabled = true;
+        }
+
         private void GodMain_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (!UserOperations.Instance.GetUserCard().EqualCheck(card.userCardList))
@@ -177,18 +182,21 @@ namespace OpenCardMaker.Windows
 
         public void CopyDataClick(object sender, RoutedEventArgs e)
         {
-            CardRow selected = (CardRow)UserCardListData.SelectedItem;
-            string output = string.Empty;
+            if (UserCardListData.SelectedItem != null)
+            {
+                CardRow selected = (CardRow)UserCardListData.SelectedItem;
+                string output = string.Empty;
 
-            // MessageBox.Show(((MenuItem)sender).Name);
-            string menu = ((MenuItem)sender).Name;
-            if (menu.Contains("CopyID")) output = selected.CardId;
-            else if (menu.Contains("CopyName")) output = selected.CardName;
-            else if (menu.Contains("CopyTitle")) output = selected.CardTitle;
-            else if (menu.Contains("CopyLevel")) output = selected.CardLevel;
-            else if (menu.Contains("CopySkill")) output = selected.CardSkill;
+                string menu = ((MenuItem)sender).Name;
+                if (menu.Contains("CopyID")) output = selected.CardId;
+                else if (menu.Contains("CopyName")) output = selected.CardName;
+                else if (menu.Contains("CopyTitle")) output = selected.CardTitle;
+                else if (menu.Contains("CopyLevel")) output = selected.CardLevel;
+                else if (menu.Contains("CopySkill")) output = selected.CardSkill;
 
-            Clipboard.SetText(output);
+                Clipboard.SetText(output);
+            }
+            else MessageBox.Show("No card selected. Select one before clicking this option.", "Copy", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         public void AboutClick(object sender, RoutedEventArgs e)
