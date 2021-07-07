@@ -11,7 +11,7 @@
             <RowDefinition Height="9*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DataGrid Name="AllCardListData" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="5,5,5,5" Width="485" Height="280" VerticalAlignment="Top">
+        <DataGrid Name="AllCardListData" IsReadOnly="True" SelectionMode="Single" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="5,5,5,5" Width="485" Height="280" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding CardId}" Width="1*" />
                 <DataGridTextColumn Header="Name" Binding="{Binding CardName}" Width="3*" />

@@ -42,7 +42,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="70"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Name="UserCardListData" IsReadOnly="True" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="False" Height="312.04" Width="584" HorizontalAlignment="Left" SelectedCellsChanged="UserCardListData_SelectedCellsChanged">
+                    <DataGrid Name="UserCardListData" IsReadOnly="True" SelectionMode="Single" AlternatingRowBackground="LightGray" AlternationCount="2" AutoGenerateColumns="False" Height="312.04" Width="584" HorizontalAlignment="Left" SelectedCellsChanged="UserCardListData_SelectedCellsChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding CardId}" Width="60" />
                             <DataGridTextColumn Header="Name" Binding="{Binding CardName}" Width="100" />

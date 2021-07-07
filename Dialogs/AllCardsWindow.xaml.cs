@@ -53,7 +53,7 @@ namespace OpenCardMaker.Dialogs
             AllCardListData.ItemsSource = null;
             AllCardListData.ItemsSource = cardList;
 
-            DiagnosticLoadTime.Text = $"Loaded {cards.Length} in {(float)stopwatch.ElapsedMilliseconds / 1000}s";
+            DiagnosticLoadTime.Text = $"Loaded {cards.Length} cards in {(float)stopwatch.ElapsedMilliseconds / 1000}s";
         }
 
         public void BtnClose(object sender, RoutedEventArgs e)
