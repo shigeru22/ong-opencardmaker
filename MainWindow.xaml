@@ -8,11 +8,9 @@
         Title="OpenCardMaker" Width="371" Height="210" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid x:Name="MainWindowGrid">
         <Grid.RowDefinitions>
-            <!-- <RowDefinition Height="45"></RowDefinition> -->
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
-            <!-- <RowDefinition Height="30"></RowDefinition> -->
             <RowDefinition Height="45"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock x:Name="MainText" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" Height="16" VerticalAlignment="Center">
@@ -24,9 +22,10 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <!-- TODO: Add elipsis -->
             <TextBlock x:Name="OngekiLocation" Grid.Column="0" Text="Ongeki Location" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,5,0" Foreground="Red" ToolTip="Ongeki folder location" />
-            <TextBox x:Name="OngekiLocationText" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="150" Margin="5,0,5,0" Height="20" IsEnabled="False" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Border BorderThickness="1" BorderBrush="LightGray" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Margin="5,0,5,0" Height="20">
+                <TextBlock x:Name="OngekiLocationText" Foreground="DimGray" TextTrimming="CharacterEllipsis" Margin="2,0,2,0" />
+            </Border>
             <Button x:Name="OngekiLocationBrowse" Click="btnOngekiLocationClick" Content="Browse..." Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="63" Height="20" RenderTransformOrigin="0.362,0.46" Margin="0,0,20,0"/>
         </Grid>
         <Grid x:Name="ConfigurationLocationGrid" Grid.Row="2" Grid.ColumnSpan="2">
@@ -36,7 +35,9 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="ConfigLocation" Grid.Column="0" Text="Config Location" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,5,0" Foreground="Red" ToolTip="Configuration folder location" />
-            <TextBox x:Name="ConfigLocationText" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="150" Margin="5,0,5,0" Height="20" IsEnabled="False" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Border BorderThickness="1" BorderBrush="LightGray" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Margin="5,0,5,0" Height="20">
+                <TextBlock x:Name="ConfigLocationText" Foreground="DimGray" TextTrimming="CharacterEllipsis" Margin="2,0,2,0" />
+            </Border>
             <Button x:Name="ConfigLocationBrowse" Click="btnConfigLocationClick" Content="Browse..." Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="63" Height="20" RenderTransformOrigin="0.362,0.46" Margin="0,0,20,0"/>
         </Grid>
         <!--
