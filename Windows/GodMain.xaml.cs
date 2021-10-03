@@ -172,7 +172,7 @@ namespace OpenCardMaker.Windows
             window.UpdateWindow();
 
             loadWindow.Close();
-            window.Show();
+            window.ShowDialog();
         }
 
         public void SaveCardsListClick(object sender, RoutedEventArgs e)
@@ -214,7 +214,7 @@ namespace OpenCardMaker.Windows
         public void AboutClick(object sender, RoutedEventArgs e)
         {
             var window = new AboutWindow();
-            window.Show();
+            window.ShowDialog();
         }
 
         public void btnLogout(object sender, RoutedEventArgs e)
