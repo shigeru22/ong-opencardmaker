@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -157,9 +159,19 @@ namespace OpenCardMaker.Windows
             window.Show();
         }
 
-        public void ViewAllCardsClick(object sender, RoutedEventArgs e)
+        public async void ViewAllCardsClick(object sender, RoutedEventArgs e)
         {
             var window = new AllCardsWindow();
+            var loadWindow = new AllCardsLoading();
+            loadWindow.LoadingText.Text = "Loading cards list...";
+            loadWindow.Show();
+
+            await Task.Run(() => Thread.Sleep(100));
+
+            window.LoadData();
+            window.UpdateWindow();
+
+            loadWindow.Close();
             window.Show();
         }
 

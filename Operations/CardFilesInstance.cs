@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace OpenCardMaker.Operations
@@ -114,6 +115,26 @@ namespace OpenCardMaker.Operations
             string[] cardDirs = Directory.GetDirectories($"{_path}");
 
             foreach (string cardDir in cardDirs) cards.Add(QueryCardData($"{cardDir}\\Card.xml", false));
+
+            return cards.ToArray();
+        }
+
+        // use this later
+        public async Task<CardData[]> QueryAllCardDataAsync()
+        {
+            if (!isPathSpecified) throw new UnsetPathException();
+
+            List<CardData> cards = new List<CardData>();
+            string[] cardDirs = Directory.GetDirectories($"{_path}");
+
+            // foreach (string cardDir in cardDirs) await Task.Run(() => cards.Add(QueryCardData($"{cardDir}\\Card.xml", false)));
+            await Task.Run(() =>
+            {
+                foreach (string cardDir in cardDirs)
+                {
+                    cards.Add(QueryCardData($"{cardDir}\\Card.xml", false));
+                }
+            });
 
             return cards.ToArray();
         }

@@ -1,7 +1,9 @@
 ﻿using OpenCardMaker.Operations;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace OpenCardMaker.Dialogs
@@ -36,24 +38,58 @@ namespace OpenCardMaker.Dialogs
         }
 
         List<CardRow> cardList = new List<CardRow>();
+        double load;
 
         public AllCardsWindow()
         {
             cardList.Clear();
+            InitializeComponent();
+
+            DiagnosticLoadTime.Text = "Loading all cards...";
+        }
+
+        // will convert to this instead of blocking UI thread
+        public async void LoadDataAsync()
+        {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            CardData[] cards = CardFilesInstance.Instance.QueryAllCardData();
-            stopwatch.Stop();
-            cardList.AddRange(from CardData card in cards
-                              let temp = new CardRow(card.dataName.Substring(4), card.CharaID.str, card.Name.str, card.SkillID.str)
-                              select temp);
 
-            InitializeComponent();
+            int total = 0;
+            await Task.Run(() =>
+            {
+                CardData[] cards = CardFilesInstance.Instance.QueryAllCardDataAsync().Result;
+                cardList.AddRange(from CardData card in cards
+                                  let temp = new CardRow(card.dataName.Substring(4), card.CharaID.str, card.Name.str, card.SkillID.str)
+                                  select temp);
+                total = cards.Length;
+            });
+            stopwatch.Stop();
 
             AllCardListData.ItemsSource = null;
             AllCardListData.ItemsSource = cardList;
 
-            DiagnosticLoadTime.Text = $"Loaded {cards.Length} cards in {(float)stopwatch.ElapsedMilliseconds / 1000}s";
+            DiagnosticLoadTime.Text = $"Loaded {total} cards in {(float)stopwatch.ElapsedMilliseconds / 1000}s";
+        }
+
+        public void LoadData()
+        {
+            Stopwatch stopwatch = new Stopwatch();
+
+            stopwatch.Start();
+            CardData[] cards = CardFilesInstance.Instance.QueryAllCardData();
+            cardList.AddRange(from CardData card in cards
+                              let temp = new CardRow(card.dataName.Substring(4), card.CharaID.str, card.Name.str, card.SkillID.str)
+                              select temp);
+            stopwatch.Stop();
+
+            load = stopwatch.ElapsedMilliseconds / 1000;
+        }
+
+        public void UpdateWindow()
+        {
+            AllCardListData.ItemsSource = null;
+            AllCardListData.ItemsSource = cardList;
+            DiagnosticLoadTime.Text = $"Loaded {cardList.Count} cards in {load}s";
         }
 
         public void BtnClose(object sender, RoutedEventArgs e)
