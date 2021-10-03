@@ -247,6 +247,8 @@ namespace OpenCardMaker.Windows
 
         public void btnRemoveClick(object sender, RoutedEventArgs e)
         {
+            if (UserCardListData.SelectedItem == null) return;
+
             CardRow selected = (CardRow)UserCardListData.SelectedItem;
 
             var result = MessageBox.Show("Confirm deletion?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
@@ -265,6 +267,8 @@ namespace OpenCardMaker.Windows
 
         public void btnDetailsClick(object sender, RoutedEventArgs e)
         {
+            if (UserCardListData.SelectedItem == null) return;
+
             CardRow selected = (CardRow)UserCardListData.SelectedItem;
 
             CardDetails dialog = new CardDetails(selected.CardId, CardFilesInstance.Instance.QueryCardData(selected.CardId), CardAssetInstance.Instance.GetImage(selected.CardId));
@@ -273,6 +277,8 @@ namespace OpenCardMaker.Windows
 
         public void btnLevelUpClick(object sender, RoutedEventArgs e)
         {
+            if (UserCardListData.SelectedItem == null) return;
+
             CardRow selected = (CardRow)UserCardListData.SelectedItem;
 
             int cardId = 0, level = 0, maxLevel = 0;
@@ -323,6 +329,8 @@ namespace OpenCardMaker.Windows
 
         public void btnCapUpClick(object sender, RoutedEventArgs e)
         {
+            if (UserCardListData.SelectedItem == null) return;
+
             CardRow selected = (CardRow)UserCardListData.SelectedItem;
 
             int cardId = 0, cap = 0, maxCap = 0;
