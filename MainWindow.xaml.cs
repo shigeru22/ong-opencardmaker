@@ -22,6 +22,12 @@ namespace OpenCardMaker
             InitializeComponent();
             OngekiLocationText.Text = settings.ongeki;
             ConfigLocationText.Text = settings.config;
+
+            if (FileChecker.OngekiFolderCheck(settings.ongeki)) OngekiLocation.Foreground = Brushes.Green;
+            else OngekiLocation.Foreground = Brushes.Red;
+
+            if (FileChecker.ConfigFolderCheck(settings.config)) ConfigLocation.Foreground = Brushes.Green;
+            else ConfigLocation.Foreground = Brushes.Red;
         }
 
         void OpenWindow(object sender, EventArgs e)
